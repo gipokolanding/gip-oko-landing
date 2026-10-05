@@ -1,6 +1,6 @@
 # ГИП «Око» Landing Product Specification
 
-**Status:** Approved design; implementation pending.
+**Status:** implemented 2026-10-05
 
 ## Document purpose
 
@@ -29,7 +29,7 @@ the brief wins.
 - Primary 3D asset: `public/models/background-model.glb`.
 - Related rendering specification:
   `.cursor/superpowers/specs/2026-09-29-blender-parity-design.md`.
-- Rebuild in place: replace the existing AI Core / agentic-runtime page.
+- Rebuild in place: the obsolete AI Core / agentic-runtime page is gone.
   Keep the local GLB and the Blender-parity color-management contract.
   Do not add a parallel route.
 - This implementation cycle does not set `NEXT_PUBLIC_DEMO_URL`. Development
@@ -565,9 +565,9 @@ SaaS” result, the implementation must remove:
 ## 6. Component structure
 
 Use Server Components by default. Keep client boundaries narrow and explicit.
-Replace `src/app/page.tsx`, `src/app/layout.tsx`, `src/app/globals.css`, and
-`src/components/hero.tsx`. Move the canvas into the landing tree below.
-Do not keep a second hero implementation.
+The page lives in `src/app/page.tsx`, `src/app/layout.tsx`, and
+`src/app/globals.css`. The canvas lives in the landing tree below.
+Do not keep a second hero implementation or restore `src/components/hero.tsx`.
 
 File and component structure:
 

@@ -12,7 +12,7 @@ agent logs.
 ## Current specs
 
 - [ГИП «Око» landing product specification](./specs/2026-10-02-landing-product-design.md)
-  — approved design; implementation pending.
+  — implemented 2026-10-05. Plan: [2026-10-05-landing-product.md](./plans/2026-10-05-landing-product.md).
 - [Blender-to-landing render parity](./specs/2026-09-29-blender-parity-design.md)
   — implemented 2026-09-29.
 - [Project agent workflow](./specs/2026-09-29-project-agent-workflow-design.md)
@@ -21,7 +21,7 @@ agent logs.
 ## Current plans
 
 - [ГИП «Око» landing product rebuild](./plans/2026-10-05-landing-product.md)
-  — implementation pending; do not mark executed until Evgeniy closes the work.
+  — **executed 2026-10-05; history only, do not re-run**.
 - [Blender render parity](./plans/2026-09-29-blender-render-parity.md)
   — **executed 2026-09-29; history only, do not re-run**.
 - [Project agent workflow initialization](./plans/2026-09-29-project-agent-workflow.md)

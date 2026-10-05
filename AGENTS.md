@@ -2,8 +2,8 @@
 
 ## Mission
 
-- Build a one-page landing for the industrial ГИП «Око» geoinformation
-  platform.
+- This repository is the one-page landing for the industrial ГИП «Око»
+  geoinformation platform.
 - Serve Russian public-sector organizations, state corporations, and
   professional spatial-data users.
 - Explain the core product workflow and lead visitors directly to the demo.

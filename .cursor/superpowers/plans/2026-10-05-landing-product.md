@@ -1,5 +1,7 @@
 # ГИП «Око» Landing Product Implementation Plan
 
+> **Status:** executed 2026-10-05. History only — do not re-run.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the obsolete AI Core landing with the eight-section Russian product page specified in the landing product design, keeping the local GLB and Blender-parity color pipeline.

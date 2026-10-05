@@ -6,8 +6,8 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
 # 3D Landing Checklist
 
 1. Read `AGENTS.md` and `.cursor/docs/brief.md`.
-2. Inspect the current rendering, asset paths, and WebGL fallback before
-   changing them.
+2. Inspect `src/components/landing/background-model-canvas.tsx`, the local
+   GLB path, and the WebGL fallback before changing them.
 3. Keep Three.js and React Three Fiber code inside client components.
 4. Keep the GLB local at `public/models/background-model.glb` and below 5 MB.
    Export it from `.cursor/ai-assets/background-model.blend` without lights or

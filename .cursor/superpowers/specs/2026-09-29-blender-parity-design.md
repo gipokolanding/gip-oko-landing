@@ -35,8 +35,7 @@ The generated GLB is exported from the unchanged source
 ## Current renderer
 
 `src/components/landing/background-model-canvas.tsx` is the sole owner of
-runtime lighting after the landing rebuild. Until that move, the same contract
-applies to `src/components/background-model-canvas.tsx`.
+runtime lighting.
 
 - `gl.outputColorSpace = SRGBColorSpace`
 - `gl.toneMapping = AgXToneMapping`
