@@ -1,0 +1,26 @@
+---
+description: How agents use the project terminal allowlist
+alwaysApply: true
+---
+
+# Auto-review allowlist
+
+`.cursor/permissions.json` is the only project source of truth for terminal
+permissions. Do not copy its command list into rules, skills, plans, or
+`AGENTS.md`.
+
+Parent agents and subagents may run a currently allowlisted command without
+asking Evgeniy for duplicate approval.
+
+When running a command:
+
+1. Check the current allowlist and block instructions.
+2. Keep every chained command within the allowlist.
+3. Never broaden an approved prefix to cover a mutation.
+4. Never set `request_smart_mode_approval` or
+   `requestSmartModeApproval` preemptively.
+5. If Auto-review blocks a command, inspect the reason. Retry with an approval
+   request only when the operation is necessary and the user should decide.
+
+Direct user instructions and the block instructions in
+`.cursor/permissions.json` always take precedence over the allowlist.

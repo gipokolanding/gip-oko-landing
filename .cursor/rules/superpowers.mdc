@@ -1,0 +1,110 @@
+---
+description: Superpowers workflow and artifact paths for ГИП Око
+alwaysApply: true
+---
+
+# Superpowers
+
+Before any task, check for relevant skills and read each selected skill before
+acting. Direct user instructions and `AGENTS.md` take precedence over skills.
+
+## Workflow
+
+For creative changes:
+
+1. Use brainstorming to explore context, clarify requirements, compare
+   approaches, and obtain design approval.
+2. Save the approved design in the project specs directory and ask Evgeniy to
+   review it.
+3. Use writing-plans to create an implementation plan.
+4. Execute only after Evgeniy chooses an execution mode.
+5. Verify the result against the brief, spec, plan, and `AGENTS.md`.
+
+For diagnosis or review, investigate and report evidence without changing
+files unless the user also requests a change.
+
+## Artifact paths
+
+- Specs: `.cursor/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
+- Plans: `.cursor/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
+- Daily agent log: `.cursor/superpowers/log/YYYY-MM-DD.md`
+- Worktrees, after Git exists: `.worktrees/<branch>/`
+- Visual companion temporary data: `.superpowers/`
+
+`.cursor/superpowers/` contains durable project artifacts. `.superpowers/` is
+temporary, ignored, and must never contain product source or durable docs.
+
+## Project skills and subagents
+
+Subagents start with clean context and do not automatically load project
+skills. Every implementer and reviewer brief must:
+
+1. Name one to three relevant skills with exact paths.
+2. Require the worker to read those skills before acting.
+3. Include `.cursor/skills/3d-landing/SKILL.md` for landing-page changes.
+4. Include the applicable spec and plan paths.
+
+Do not attach unrelated skills or override `AGENTS.md`.
+
+## Standing decisions
+
+After Evgeniy approves a lasting convention, update its owner:
+
+| Decision                                             | Owner                                |
+| ---------------------------------------------------- | ------------------------------------ |
+| Product mission, stack, commands, global constraints | `AGENTS.md`                          |
+| Agent workflow and artifact lifecycle                | `.cursor/rules/superpowers.mdc`      |
+| Terminal allowlist and approval boundaries           | `.cursor/permissions.json`           |
+| 3D landing procedure and domain traps                | `.cursor/skills/3d-landing/SKILL.md` |
+| Feature or subsystem architecture                    | `.cursor/superpowers/specs/`         |
+| Artifact index and lifecycle status                  | `.cursor/superpowers/README.md`      |
+
+Keep `AGENTS.md` concise. Do not create a permanent rule or skill for a
+one-off fix. If the owner is unclear, ask Evgeniy.
+
+## Daily agent log
+
+At the end of each completed unit of work, the parent agent appends one block
+to `.cursor/superpowers/log/YYYY-MM-DD.md` using local time. The canonical
+format, allowed content, and exclusions are owned by
+`.cursor/superpowers/log/README.md`; do not duplicate that schema in other
+active rules.
+
+## Git safety
+
+Local Git is allowed: `init`, `add`, `commit`, `branch`, `checkout`, `switch`,
+and `merge`. Create worktrees under `.worktrees/` only when a task needs
+isolation.
+
+Do not add remotes, fetch, pull, push, or change Git configuration. Never
+assume that `origin` exists. Evgeniy is the only one who pushes to a remote.
+
+## Closing a completed plan
+
+Evgeniy closes a plan in chat. Match the **intent**, not a fixed phrase. Examples:
+
+- «ок, заканчиваем работу и обновляем документацию»
+- «считаю, что все планы выполнены»
+- «закрывай план»
+- «считай работу выполненной»
+
+Same intent: this work is finished, the plan or plans are done, update the docs. That message is the moment to **ask**, not to edit.
+
+**Ask before writing.** Name the plan file or files, their linked design specs, and every permanent project document or skill that still describes the old behavior of this unit. Ask whether to mark the plans executed and update those owners. No plan file is not a reason to skip the spec and owner list. An already executed plan is not re-stamped. Do not touch the plan, README, spec, skill, or the close block in the log until he answers yes to that question. «Да» / «ок» on a diff, a spec, or an implementation result is not that answer. «Да» to the close question is. Do not ask a second time after he already confirmed.
+
+Do **not** ask or stamp when:
+
+- the agent wrote `done` in the session log, or verification passed
+- he approved a spec, a plan file, or one implementation diff («ок», «да», «продолжай»)
+- he is still reviewing the result
+- the log only records that a spec or plan was written
+
+«Все планы» means every plan **this unit of work** actually finished, not every file under `plans/`. The confirmation question lists those paths.
+
+After he confirms, in that same change the parent agent:
+
+1. Banner under the plan title: `> **Status:** executed YYYY-MM-DD. History only — do not re-run.` This banner is authoritative; leave step checkboxes as `- [ ]`.
+2. One line in `.cursor/superpowers/README.md`: the plan is **executed**, do not re-run.
+3. If that plan’s spec still reads as to-be, set `**Status:** implemented YYYY-MM-DD`. Keep plan traceability in `.cursor/superpowers/README.md`.
+4. A session-log block for the close.
+5. Update each spec and skill named in the question so it matches the finished behavior. Do not leave the close with a known contradiction.

@@ -1,0 +1,7 @@
+﻿# Private chat exports
+.chats/
+
+# Generated dependencies and build output
+node_modules/
+.next/
+out/

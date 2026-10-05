@@ -1,0 +1,44 @@
+{
+  "terminalAllowlist": [
+    "npm run dev",
+    "npm.cmd run dev",
+    "npm run lint",
+    "npm.cmd run lint",
+    "npm run build",
+    "npm.cmd run build",
+    "git status",
+    "git diff",
+    "git log",
+    "git show",
+    "git rev-parse",
+    "git init",
+    "git add",
+    "git commit",
+    "git branch",
+    "git checkout",
+    "git switch",
+    "git merge",
+    "Get-ChildItem",
+    "gci",
+    "dir",
+    "ls"
+  ],
+  "autoRun": {
+    "allow_instructions": [
+      "Always auto-run npm run dev, npm.cmd run dev, npm run lint, npm.cmd run lint, npm run build, and npm.cmd run build for this project.",
+      "Always auto-run read-only Git inspection commands: git status, git diff, git log, git show, and git rev-parse.",
+      "Always auto-run local Git mutations that do not touch remotes or config: git init, git add, git commit, git branch, git checkout, git switch, and git merge.",
+      "Always auto-run directory listing commands: Get-ChildItem, gci, dir, and ls.",
+      "If the Shell wrapper is powershell.exe, pwsh, or cmd.exe, still auto-run when the inner command matches the allowlist.",
+      "A command that starts with an allowlisted prefix stays auto-run with flags and paths, but chaining must not authorize a command outside the allowlist.",
+      "Do not treat a Task subagent or a path under src/ as a reason to prompt for an allowlisted command.",
+      "Never require request_smart_mode_approval for allowlisted prefixes."
+    ],
+    "block_instructions": [
+      "Always ask before git fetch, git pull, git push, remote changes, git config changes, rebase, reset, stash, or worktree operations.",
+      "Always ask before installing, updating, uninstalling, or publishing packages; deploying; or changing external services.",
+      "Always ask before destructive file deletion outside the repository, recursive deletion, or wiping worktrees.",
+      "Ask before git diff --no-index of paths outside this workspace or any command whose first token is not on the allowlist."
+    ]
+  }
+}
