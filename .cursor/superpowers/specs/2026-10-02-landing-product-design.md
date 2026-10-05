@@ -44,12 +44,11 @@ The page must help a professional visitor understand the working model of
 ГИП «Око» within two to four minutes and then move directly into the product
 demonstration.
 
-The page must communicate four connected capabilities:
+The page must communicate three connected capabilities:
 
 1. combine heterogeneous territorial data in one spatial context;
-2. compare overlapping layers;
-3. perform a spatial action such as measurement or annotation;
-4. inspect the result in 3D and return to a flat representation.
+2. perform a spatial action such as measurement or annotation;
+3. inspect the result in 3D and return to a flat representation.
 
 The page must not behave like a product manual, a lead-generation form, or a
 generic technology showcase. Its job is to establish enough product
@@ -61,24 +60,21 @@ than an instrumented conversion metric.
 
 ## 2. Page sections
 
-The page is a single linear narrative with eight content sections:
+The page is a single linear narrative with four product sections, followed
+by institutional contacts:
 
 1. Hero — territory as one spatial whole.
 2. Unified spatial context — heterogeneous data in one project.
-3. Working scenario — the five-step product workflow.
-4. Layer comparison — swipe and opacity as concrete evidence.
-5. Analysis tools — capabilities grouped by user task.
-6. Data and compatibility — confirmed formats, services, and coordinate
-   systems.
-7. Demo scenario — what the visitor can verify after launch.
-8. Final transition — a direct handoff to the working demo.
+3. Analysis tools — capabilities grouped by user task.
+4. Final transition — a direct handoff to the working demo.
+5. Contacts — organization requisites after the product narrative.
 
-A site header and a minimal footer support these sections but do not introduce
-additional marketing narratives.
+A site header supports these sections but does not introduce additional
+marketing narratives.
 
-The order is fixed. It moves from definition, to product model, to workflow,
-to evidence, to breadth, and finally to action. Implementations must not
-reorder sections to create a generic feature-card page.
+The order is fixed. It moves from definition, to product model, to task
+breadth, to action, and ends with contacts. Implementations must not reorder
+sections to create a generic feature-card page.
 
 ## 3. Content for each section
 
@@ -92,13 +88,15 @@ Required visible content:
 - Brand: `ГИП «Око»`
 - Navigation:
   - `Данные` → unified spatial context
-  - `Сценарий` → working scenario
   - `Инструменты` → analysis tools
+  - `Контакты` → contacts
 - Primary action: `Запустить демонстрацию`
 
 The header must not contain status theater such as “online,” “active,”
 “runtime,” or artificial system telemetry. The navigation must remain
-available at 390 px rather than disappearing.
+available at 390 px rather than disappearing. The header stays in the
+viewport while the page scrolls, so brand, anchors, and the demo action
+remain reachable without returning to the top.
 
 ### Section 1 — Hero
 
@@ -107,15 +105,12 @@ demo launch above the fold.
 
 Required content:
 
-- Product name: `ГИП «Око»`
 - H1: `Территория в едином пространственном контексте`
 - Product definition:
   `ГИП «Око» — промышленная геоинформационная платформа для совместной работы с растрами, векторными слоями, рельефом и 3D-моделями в браузере.`
 - Problem-to-result statement:
   `Сопоставляйте данные из разных источников, выполняйте измерения и изучайте территорию в 3D, не переключаясь между разрозненными инструментами.`
 - Primary action: `Запустить демонстрацию`
-- Supporting action copy:
-  `Откройте проект, сравните слои и исследуйте территорию в 3D.`
 
 The local GLB is an atmospheric hero-level background visual. It may react
 subtly to pointer movement, but it does not represent a product control,
@@ -158,86 +153,7 @@ Required closing line:
 This content must be presented as relationships around one territory, not as
 four identical SaaS feature cards.
 
-### Section 3 — Working scenario
-
-Anchor: `workflow`
-
-Purpose: show the real product sequence and prepare the visitor for the demo.
-This is the only section where sequential numbering is permitted.
-
-Required heading:
-
-`От запроса к пространственной картине`
-
-Required introductory copy:
-
-`Основной сценарий проходит от поиска территории до проверки результата в объёмном представлении.`
-
-Required five steps:
-
-1. `Найдите территорию`
-   - `Перейдите к нужному району по названию или координатам.`
-2. `Откройте проект`
-   - `Просмотрите структуру слоёв и выберите данные для текущей задачи.`
-3. `Сопоставьте материалы`
-   - `Измените видимость, порядок или прозрачность слоёв и сравните перекрывающиеся растры.`
-4. `Выполните действие`
-   - `Измерьте расстояние или площадь либо нанесите пользовательский объект.`
-5. `Осмотрите результат в 3D`
-   - `Оцените рельеф и объекты в объёме, затем вернитесь к 2D или 2.5D.`
-
-Desktop presentation:
-
-- A manually controlled slider with one step visible as the primary frame.
-- Visible controls named `Назад` and `Далее`.
-- Visible progress copy in the form `Шаг 1 из 5`.
-- No autoplay and no drag-only interaction.
-
-Mobile presentation:
-
-- The five steps become a normal vertical list.
-- Content remains fully available without carousel interaction.
-
-Media state before approved product screenshots exist:
-
-- Each frame uses an honest neutral media frame, not a fabricated app UI.
-- Frame label format: `Экран 1. Поиск территории`.
-- Required media note:
-  `Скриншот продукта будет добавлен после согласования материалов.`
-
-When approved screenshots are supplied, replace only the media frames. Keep
-the sequence, copy, controls, and accessibility behavior unchanged unless the
-brief is revised.
-
-### Section 4 — Layer comparison
-
-Purpose: make the benefit of overlapping-data comparison concrete without
-pretending that the landing page performs geospatial analysis.
-
-Required heading:
-
-`Сравнивайте слои в одном положении`
-
-Required body copy:
-
-`Режим «шторки» помогает визуально сопоставить перекрывающиеся растры. Прозрачность и параметры отображения позволяют проверить различия, не теряя пространственный контекст.`
-
-Required supporting points:
-
-- `Перемещайте границу между двумя растровыми материалами.`
-- `Изменяйте прозрачность выбранного слоя.`
-- `Настраивайте яркость, контрастность, оттенок, насыщенность и гамму.`
-
-The landing implementation defined by this specification uses a static
-evidence composition with a clear divider and labels `Материал A` and
-`Материал B`. It must not imitate a live map control. An interactive
-before/after control is not required by this specification.
-
-Only approved open data or synthetic data may appear in the composition.
-Synthetic imagery requires the visible caption:
-`Иллюстрация на синтетических данных.`
-
-### Section 5 — Analysis tools
+### Section 3 — Analysis tools
 
 Anchor: `tools`
 
@@ -246,7 +162,7 @@ catalog.
 
 Required heading:
 
-`Инструменты по задаче`
+`Инструменты работы с картой`
 
 Required introductory copy:
 
@@ -273,61 +189,14 @@ The four groups must not be rendered as equal rounded cards. Use an
 asymmetric editorial structure that reflects the different amount and type of
 content in each group.
 
-### Section 6 — Data and compatibility
-
-Purpose: give selection participants a short, verifiable inventory of
-confirmed compatibility.
-
-Required heading:
-
-`Данные и системы координат`
-
-Required introductory copy:
-
-`Платформа работает с подтверждённым набором геопространственных сервисов, форматов и систем координат.`
-
-Required inventory:
-
-- `Сервисы: WMTS 1.0.0, WCS 2.0.1`
-- `Форматы: BIR, GPKG, KML/KMZ`
-- `Рельеф: .terrain`
-- `Системы координат: WGS-84, СК-42, ПЗ-90.11`
-
-Do not add formats, protocols, databases, integrations, or deployment claims
-that are not in the brief. This section is an inventory, not a logo wall.
-
-### Section 7 — Demo scenario
-
-Purpose: remove uncertainty about what happens after activation of the primary
-CTA.
-
-Required heading:
-
-`Что можно проверить в демонстрации`
-
-Required introductory copy:
-
-`Демонстрационная среда позволяет пройти основной сценарий работы с геопространственными данными.`
-
-Required checklist:
-
-- `Найти территорию по названию или координатам.`
-- `Открыть проект с разными типами пространственных данных.`
-- `Сопоставить перекрывающиеся слои и изменить их представление.`
-- `Выполнить измерение или нанести пользовательский объект.`
-- `Перейти к 3D-представлению и вернуться к плоскому виду.`
-
-Do not add a form, email field, phone field, consultation offer, presentation
-download, or secondary conversion path.
-
-### Section 8 — Final transition
+### Section 4 — Final transition
 
 Purpose: repeat the direct product action after the visitor understands the
-scenario.
+product model.
 
 Required heading:
 
-`Откройте рабочий сценарий ГИП «Око»`
+`Откройте демонстрацию ГИП «Око»`
 
 Required body copy:
 
@@ -340,15 +209,32 @@ Required primary action:
 The action opens the configured demo in the current tab. It must not be
 replaced with a contact form, modal, download, or callback request.
 
-### Footer
+### Section 5 — Contacts
 
-Required content:
+Anchor: `contacts`
 
-- `ГИП «Око»`
+Purpose: give a typical institutional contact block after the product
+narrative. This section must not compete with the demo CTA or collect leads.
 
-No company name, legal statement, contact information, customer logo, or
-certification mark may be invented. Add such content only after the product
-owner supplies and approves it.
+Required heading:
+
+`Контакты`
+
+Required introductory copy:
+
+`Реквизиты для связи по вопросам применения платформы.`
+
+Required fields, using development placeholders until the product owner
+supplies real requisites:
+
+- `Организация` — `ООО «Наименование организации»`
+- `Адрес` — `000000, г. Москва, ул. Примерная, д. 0`
+- `Телефон` — `+7 (000) 000-00-00`
+- `Электронная почта` — `info@example.com`
+
+Phone and email may be ordinary `tel:` and `mailto:` links. Do not invent a
+real organization, address, or published legal identity. Do not add a contact
+form, map, or callback request.
 
 ### Page metadata
 
@@ -369,6 +255,9 @@ or unsupported deployment properties.
 ### Narrative and navigation
 
 - The primary experience is a linear top-to-bottom scroll.
+- The site header remains visible at the top of the viewport during scroll.
+- In-page anchors account for the sticky header height and do not hide
+  headings under it.
 - Header links are optional accelerators, not a requirement for understanding
   the page.
 - Anchor targets use stable IDs and account for keyboard focus.
@@ -394,29 +283,16 @@ When the URL is absent in development:
 
 - Render a non-link disabled action.
 - Apply `aria-disabled="true"`.
-- Show the adjacent copy:
-  `Демонстрационная версия готовится к публикации.`
+- Do not add adjacent explanation copy.
 
 ### Progressive enhancement
 
 - The server-rendered document contains all meaningful headings, body copy,
-  lists, compatibility data, and CTA context.
-- JavaScript enhances only the workflow slider and hero canvas.
-- Without JavaScript, workflow steps remain readable in document order and
-  the page still explains the complete product narrative.
+  lists, and CTA context.
+- JavaScript enhances only the hero canvas.
+- Without JavaScript, the page still explains the complete product narrative.
 - Without WebGL, the hero uses the normal CSS background and retains all text
   and actions. No blocking error is shown because the model is decorative.
-
-### Workflow slider
-
-- It never advances automatically.
-- Previous and next controls are real buttons.
-- The active frame and visible step count update together.
-- Arrow keys may supplement buttons when focus is inside the slider, but
-  arrow-key behavior must not replace visible controls.
-- Pointer dragging is optional and must never be the only interaction.
-- At viewport widths of 760 px and below, enhancement is removed and steps are
-  presented as a standard list.
 
 ### Responsive behavior
 
@@ -426,7 +302,6 @@ When the URL is absent in development:
 - Navigation wraps or moves to a second row on narrow screens; it is not
   removed.
 - Data groups and tool groups become one-column content in logical order.
-- Compatibility items wrap as text, not as horizontally scrolling chips.
 - No essential copy appears only on hover.
 
 ## 5. Visual direction
@@ -447,7 +322,7 @@ HUD, or a generic card-based SaaS template.
 - Frost — `#ECF6F7`: primary text.
 - Muted Steel — `#8FA1AB`: secondary text.
 - Signal Cyan — `#58E8F4`: primary CTA, focus, selection, and key data line.
-- Restrained Violet — `#7466C9`: comparison, depth, and one secondary layer.
+- Restrained Violet — `#7466C9`: depth and one secondary layer.
 
 Rules:
 
@@ -465,7 +340,7 @@ Rules:
 - Use one self-hosted variable family: Golos Text.
 - Store the WOFF2 asset and its license locally in the repository.
 - Use the same family for display, body, labels, and controls.
-- Use tabular figures for coordinates, versions, and step counts.
+- Use tabular figures for coordinates and versions.
 - Do not use decorative monospace text.
 - Do not use tracked all-caps labels.
 - Do not emphasize one word in a heading with italic, gradient, or accent
@@ -487,15 +362,17 @@ Suggested type scale:
 - Desktop grid: 12 columns with 24 px gaps.
 - Desktop side gutters: at least 32 px.
 - Mobile side gutters at 390 px: 18 px.
-- Desktop section spacing: 112–144 px.
-- Mobile section spacing: 72–88 px.
+- Desktop section `padding-block`: 64 px.
+- Mobile section `padding-block`: 40 px.
+- Hero bottom padding: 48 px on desktop, 32 px at 390 px. Do not double
+  these values as extra gap between sections.
 - Default alignment: left.
 
 Desktop composition:
 
 ```text
 ┌──────────────────────────────────────────────────────────────┐
-│ Brand          Data · Scenario · Tools             Demo CTA │
+│ Brand          Data · Tools                        Demo CTA │
 ├────────────────────────── Hero ──────────────────────────────┤
 │ Product definition      │                       [GLB field] │
 │ Problem → result        │                    atmospheric 3D │
@@ -503,16 +380,8 @@ Desktop composition:
 ├───────────────┬──────────────────────────────────────────────┤
 │ Why together  │ Raster / Vector / Terrain / 3D relations   │
 ├───────────────┴──────────────────────────────────────────────┤
-│ Five-step workflow slider / future product screenshots      │
-├──────────────────────────────┬───────────────────────────────┤
-│ Layer comparison explanation │ Static comparison evidence  │
-├──────────────┬───────────────┴───────────────────────────────┤
-│ Tasks        │ Search / Mark / Measure / Inspect in 3D      │
-├──────────────┴───────────────────────────────────────────────┤
-│ Compatibility inventory                                      │
-├──────────────────────────────┬───────────────────────────────┤
-│ What happens in demo         │ Five verifiable actions      │
-├──────────────────────────────┴───────────────────────────────┤
+│ Tasks: Search / Mark / Measure / Inspect in 3D              │
+├──────────────────────────────────────────────────────────────┤
 │ Final direct demo transition                                 │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -526,8 +395,6 @@ Additional rules:
 - Use corner radii only where they communicate a media frame or control
   boundary; do not apply one global radius to every surface.
 - Stars are sparse local CSS layers, not a stock image.
-- Product screenshots, when supplied, are shown as evidence and are not
-  hidden behind heavy perspective, blur, or decorative device frames.
 
 ### Hero model and motion
 
@@ -556,7 +423,7 @@ SaaS” result, the implementation must remove:
 - English marketing slogans;
 - monospace telemetry labels;
 - all-caps eyebrows above every heading;
-- numbered sections outside the real five-step workflow;
+- numbered marketing sections;
 - gradient headline accents;
 - identical rounded feature cards;
 - speculative app-shell chrome;
@@ -584,17 +451,11 @@ src/
       hero-model.tsx
       background-model-canvas.tsx
       spatial-context-section.tsx
-      workflow-section.tsx
-      workflow-slider.tsx
-      layer-comparison-section.tsx
       analysis-tools-section.tsx
-      compatibility-section.tsx
-      demo-scenario-section.tsx
       final-cta-section.tsx
-      site-footer.tsx
+      contacts-section.tsx
       demo-link.tsx
       section-heading.tsx
-      media-placeholder.tsx
   content/
     landing.ts
   lib/
@@ -611,8 +472,7 @@ Responsibilities:
   - Owns Russian document language, metadata, local font configuration,
     viewport, and global page shell.
 - `content/landing.ts`
-  - Typed static content for navigation, sections, workflow steps,
-    compatibility items, and CTA strings.
+  - Typed static content for navigation, sections, and CTA strings.
   - Contains no HTML and no runtime fetching.
 - `lib/demo-url.ts`
   - Validates `NEXT_PUBLIC_DEMO_URL`.
@@ -620,6 +480,7 @@ Responsibilities:
     failure.
 - `SiteHeader`
   - Brand, three anchor links, and the shared demo action.
+  - Stays in the viewport while the page scrolls.
 - `HeroSection`
   - Server-rendered heading, definition, result statement, CTA, and visual
     slot.
@@ -634,32 +495,21 @@ Responsibilities:
     pointer and motion states.
 - `SpatialContextSection`
   - Renders the four data relationships as semantic content.
-- `WorkflowSection`
-  - Server wrapper and no-JavaScript ordered content.
-- `WorkflowSlider`
-  - Client enhancement for desktop only.
-  - Owns active-step state and accessible controls.
-- `LayerComparisonSection`
-  - Static semantic evidence composition.
-  - Contains no fake map control.
 - `AnalysisToolsSection`
   - Renders four task groups in an asymmetric layout.
-- `CompatibilitySection`
-  - Renders the exact confirmed inventory.
-- `DemoScenarioSection`
-  - Explains the five actions available after launch.
 - `FinalCtaSection`
   - Repeats the shared direct demo action.
+- `ContactsSection`
+  - Renders the institutional contact requisites after the final CTA.
+  - Uses placeholder values until real requisites exist.
 - `DemoLink`
   - The only primary CTA presentation component.
   - Receives validated state and keeps copy and behavior consistent.
-- `MediaPlaceholder`
-  - Development-stage workflow media frame with explicit approval copy.
 - `SectionHeading`
   - Shared semantic heading primitive without automatic eyebrow text.
 
-There is no global client state. Section content is static. The slider state
-and canvas state remain isolated within their respective client boundaries.
+There is no global client state. Section content is static. Canvas state
+remains isolated within its client boundary.
 
 ## 7. Accessibility requirements
 
@@ -667,7 +517,7 @@ The target is WCAG 2.2 AA for the landing page.
 
 ### Semantics and reading order
 
-- Use `header`, `nav`, `main`, `section`, and `footer` landmarks.
+- Use `header`, `nav`, `main`, and `section` landmarks.
 - Include a visible-on-focus skip link to `main`.
 - Use exactly one H1.
 - Preserve sequential heading levels.
@@ -681,9 +531,6 @@ The target is WCAG 2.2 AA for the landing page.
 - Focus order follows the page narrative.
 - Focus is never trapped.
 - The header navigation remains present at 390 px.
-- Slider buttons work with Enter and Space.
-- Slider arrow-key enhancement, if implemented, is documented in an
-  accessible instruction and does not override page scrolling unexpectedly.
 - No content requires hover, drag, pointer parallax, or canvas interaction.
 - The landing page works without a mouse. Do not turn this implementation
   property into a claim that all map tools in the product work without a
@@ -695,29 +542,15 @@ The target is WCAG 2.2 AA for the landing page.
 - Focus indicators have at least 3:1 contrast against adjacent colors.
 - Do not remove native focus without a replacement.
 - Pointer targets are at least 44 by 44 CSS pixels.
-- Disabled demo actions are not focusable as links and expose their
-  unavailable state in text.
+- Disabled demo actions are not focusable as links.
 - The final action is not hidden behind a modal or custom gesture.
-
-### Workflow slider
-
-- Use the WAI-ARIA carousel pattern only where it improves semantics; do not
-  add roles that conflict with native elements.
-- Controls have visible names.
-- The current step is announced politely when changed by a user action.
-- Inactive frames must not expose hidden interactive descendants.
-- There is no autoplay, pause control, or time limit.
-- The complete ordered list remains available to assistive technology and in
-  the mobile layout.
 
 ### Visual content
 
 - Normal text contrast is at least 4.5:1.
 - Large text contrast is at least 3:1.
 - UI controls and meaningful graphics meet 3:1 non-text contrast.
-- Do not encode layer identity by color alone; pair color with text or shape.
-- Approved screenshots require concise alt text describing the task shown,
-  not the decorative appearance.
+- Do not encode meaning by color alone; pair color with text or shape.
 - Decorative stars, the GLB, and decorative layer lines are hidden from the
   accessibility tree.
 - No meaningful copy is rendered into canvas.
@@ -725,8 +558,8 @@ The target is WCAG 2.2 AA for the landing page.
 ### Motion
 
 - Respect `prefers-reduced-motion: reduce`.
-- Disable smooth scrolling, entrance animation, model rotation, pointer
-  parallax, and animated comparison transitions in reduced-motion mode.
+- Disable smooth scrolling, entrance animation, model rotation, and pointer
+  parallax in reduced-motion mode.
 - A static model or CSS fallback is acceptable.
 - Do not use flashing, rapid pulsing, or parallax that moves independently of
   user input.
@@ -747,14 +580,13 @@ not block first content paint or CTA usability.
 Measure lab results against a production build in Chromium with a cold cache,
 a 390 by 844 px viewport, 4× CPU slowdown, and Slow 4G network emulation.
 Record the median of three runs. Treat INP as the production field target;
-during local verification, exercise the navigation, workflow controls, and
-CTA and confirm that no long task causes a visibly delayed response.
+during local verification, exercise the navigation and CTA and confirm that
+no long task causes a visibly delayed response.
 
 ### Rendering and JavaScript
 
 - `app/page.tsx` and all static sections remain Server Components.
-- Only the hero model wrapper, canvas, and desktop workflow enhancement ship
-  client behavior.
+- Only the hero model wrapper and canvas ship client behavior.
 - Dynamically import the canvas with SSR disabled.
 - Do not load Three.js, React Three Fiber, Drei, or the GLB before the primary
   HTML is usable.
@@ -784,10 +616,6 @@ CTA and confirm that no long task causes a visibly delayed response.
 - Preload only the font file needed for initial text.
 - Use `font-display: swap`.
 - Do not fetch fonts from a remote provider at runtime.
-- Future product screenshots use AVIF or WebP where practical.
-- Provide intrinsic width and height for every raster image.
-- Use responsive source sizes rather than sending desktop images to 390 px
-  devices.
 - Avoid video unless a later approved brief explicitly requires it.
 
 ### Network and privacy
@@ -795,7 +623,8 @@ CTA and confirm that no long task causes a visibly delayed response.
 - No remote decorative assets.
 - No analytics, trackers, session replay, advertising, or telemetry.
 - No background product API requests from the landing page.
-- The only external navigation is the user-activated demo destination.
+- The only user-activated destinations outside the page are the configured
+  demo URL and the contact `tel:` / `mailto:` links.
 - There must be no unexpected network failures in the browser console.
 
 ## 9. Safety copy
@@ -831,20 +660,6 @@ Until the product owner provides evidence and approves wording, do not claim:
 - full keyboard-only operation of the map product;
 - integrations, services, or formats outside the confirmed list.
 
-### Required state copy
-
-Use these exact strings where the corresponding state exists:
-
-- Synthetic visual:
-  `Иллюстрация на синтетических данных.`
-- Pending approved screenshot:
-  `Скриншот продукта будет добавлен после согласования материалов.`
-- Demo destination absent in development:
-  `Демонстрационная версия готовится к публикации.`
-
-The WebGL fallback does not require an error message because the model is
-decorative and the complete hero remains available.
-
 ### Visual-data safety
 
 - Do not show sensitive data, restricted territories, personal data,
@@ -854,12 +669,14 @@ decorative and the complete hero remains available.
   incident details, or operational coordinates.
 - Any future screenshot must be reviewed for content safety before it enters
   the repository.
+- The WebGL fallback does not require an error message because the model is
+  decorative and the complete hero remains available.
 
 ## 10. Definition of done
 
 ### Content and behavior
 
-- All eight sections appear in the specified order.
+- All five sections appear in the specified order.
 - All required Russian UI copy is present and proofread.
 - The old AI Core, agentic runtime, and English slogan content is absent.
 - Header navigation reaches the correct section anchors.
@@ -867,8 +684,6 @@ decorative and the complete hero remains available.
 - A valid real demo URL is configured for production.
 - The CTA opens the demo directly in the current tab without a form or modal.
 - No unsupported claims or invented business details appear.
-- Workflow placeholders are explicit and do not imitate an unverified product
-  UI.
 
 ### Visual implementation
 
@@ -884,9 +699,9 @@ decorative and the complete hero remains available.
 
 - Keyboard-only navigation reaches and activates every control.
 - The page remains usable without a mouse.
-- The 390 px header navigation is present and operable.
+- The 390 px header navigation is present, operable, and remains visible
+  while the page scrolls.
 - Focus indicators are visible and not obscured.
-- The workflow slider has no autoplay and has working named controls.
 - Reduced-motion mode removes nonessential motion.
 - Automated accessibility inspection reports no critical or serious issues.
 - Manual checks confirm heading order, landmarks, reading order, focus order,

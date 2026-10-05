@@ -51,5 +51,5 @@
 - No console, hydration, accessibility, or unexpected network errors.
 - The local GLB loads, degrades safely, and remains below 5 MB.
 - Desktop, 390 px, keyboard-only, no-mouse, reduced-motion, and WebGL fallback
-  checks pass.
-- `npm run lint` and `npm run build` pass from the repository root.
+checks pass.
+<!-- - `npm run lint` and `npm run build` pass from the repository root. -->

@@ -18,11 +18,8 @@ export function DemoLink({ demo, className }: DemoLinkProps) {
   }
 
   return (
-    <div className="demo-unavailable">
-      <span className="demo-link is-disabled" aria-disabled="true">
-        {label}
-      </span>
-      <span className="demo-unavailable-note">{landing.cta.unavailable}</span>
-    </div>
+    <span className={className ?? "demo-link is-disabled"} aria-disabled="true">
+      {label}
+    </span>
   );
 }

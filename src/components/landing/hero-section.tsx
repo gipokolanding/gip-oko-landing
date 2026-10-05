@@ -11,13 +11,11 @@ export function HeroSection({ demo }: HeroSectionProps) {
   return (
     <section className="hero wrap" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="hero-name">{landing.hero.productName}</p>
         <h1 id="hero-title">{landing.hero.title}</h1>
         <p className="hero-definition">{landing.hero.definition}</p>
         <p className="hero-result">{landing.hero.result}</p>
         <div className="hero-actions">
           <DemoLink demo={demo} />
-          <p className="hero-supporting">{landing.hero.supporting}</p>
         </div>
       </div>
       <div className="hero-visual" aria-hidden="true">

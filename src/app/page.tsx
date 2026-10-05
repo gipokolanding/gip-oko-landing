@@ -1,13 +1,9 @@
 import { AnalysisToolsSection } from "@/components/landing/analysis-tools-section";
-import { CompatibilitySection } from "@/components/landing/compatibility-section";
-import { DemoScenarioSection } from "@/components/landing/demo-scenario-section";
+import { ContactsSection } from "@/components/landing/contacts-section";
 import { FinalCtaSection } from "@/components/landing/final-cta-section";
 import { HeroSection } from "@/components/landing/hero-section";
-import { LayerComparisonSection } from "@/components/landing/layer-comparison-section";
-import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteHeader } from "@/components/landing/site-header";
 import { SpatialContextSection } from "@/components/landing/spatial-context-section";
-import { WorkflowSection } from "@/components/landing/workflow-section";
 import { landing } from "@/content/landing";
 import { resolveDemoUrl } from "@/lib/demo-url";
 
@@ -27,14 +23,10 @@ export default function Home() {
       <main id="main-content">
         <HeroSection demo={demo} />
         <SpatialContextSection />
-        <WorkflowSection />
-        <LayerComparisonSection />
         <AnalysisToolsSection />
-        <CompatibilitySection />
-        <DemoScenarioSection />
         <FinalCtaSection demo={demo} />
+        <ContactsSection />
       </main>
-      <SiteFooter />
     </div>
   );
 }
