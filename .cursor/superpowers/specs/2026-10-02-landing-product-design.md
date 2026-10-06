@@ -88,7 +88,7 @@ Required visible content:
 - Brand: `ГИП «Око»`
 - Navigation:
   - `Данные` → unified spatial context
-  - `Инструменты` → analysis tools
+  - `Сценарии` → analysis tools
   - `Контакты` → contacts
 - Primary action: `Запустить демонстрацию`
 
@@ -151,7 +151,8 @@ Required closing line:
 `Видимость, порядок и прозрачность слоёв настраиваются внутри одного рабочего пространства.`
 
 This content must be presented as relationships around one territory, not as
-four identical SaaS feature cards.
+four identical SaaS feature cards. The four groups fill a 2×2 grid without
+empty cells.
 
 ### Section 3 — Analysis tools
 
@@ -162,7 +163,7 @@ catalog.
 
 Required heading:
 
-`Инструменты работы с картой`
+`Комплексные сценарии работы с данными`
 
 Required introductory copy:
 
@@ -175,19 +176,20 @@ Required task groups:
   - `Проверяйте координаты и высоту рельефа под курсором.`
   - `Работайте в системах координат WGS-84, СК-42 и ПЗ-90.11.`
 - `Нанести объекты`
-  - `Добавляйте точки, линии, прямоугольники, окружности, полигоны, текст и фотографии.`
+  - `Добавляйте точки, линии, прямоугольники, окружности, полигоны, полусферы, текст и фотографии.`
   - `Собирайте пользовательские объекты в именованные коллекции.`
   - `Импортируйте и экспортируйте KML/KMZ.`
 - `Выполнить измерение`
   - `Измеряйте расстояние, длину линии и площадь непосредственно на карте.`
-- `Исследовать рельеф и 3D`
-  - `Используйте гипсометрическую раскраску и горизонтали.`
-  - `Выполняйте круговой облёт вокруг выбранной точки и переходите к виду из заданной точки.`
-  - `Размещайте и настраивайте 3D-модели и объёмные зоны в форме купола.`
+- `Исследовать рельеф`
+  - `Используйте гипсометрическую раскраску и горизонтали, определяйте профили высот.`
+- `Управлять обзором`
+  - `Выполняйте круговой облёт вокруг выбранной точки, переходите к виду «из глаз», просматривайте карту в 2D, 2,5D и 3D режимах, делайте снимки экрана без интерфейса приложения.`
 
-The four groups must not be rendered as equal rounded cards. Use an
+The five groups must not be rendered as equal rounded cards. Use an
 asymmetric editorial structure that reflects the different amount and type of
-content in each group.
+content in each group. The first group spans the full row; the remaining four
+sit in two paired rows.
 
 ### Section 4 — Final transition
 
@@ -348,13 +350,17 @@ Rules:
 - Body copy should generally remain within 68–72 characters per line.
 - Headings use scale, weight, and line breaks rather than ornamental styling.
 
-Suggested type scale:
+Suggested type scale (clamp maxima match 1024 px):
 
-- Hero H1: `clamp(3.25rem, 7vw, 7rem)`, line-height `0.92–0.98`.
-- Section H2: `clamp(2.25rem, 4.5vw, 4.75rem)`, line-height `0.98–1.05`.
-- H3: `clamp(1.25rem, 2vw, 1.75rem)`.
+- Hero H1: `clamp(3.25rem, 7vw, 4.48rem)`, line-height `0.92–0.98`.
+- Section H2: `clamp(2.25rem, 4.5vw, 2.88rem)`, line-height `0.98–1.05`.
+- H3: `clamp(1.25rem, 2vw, 1.28rem)`.
 - Body: `1rem–1.125rem`, line-height `1.55–1.7`.
 - Supporting text: no smaller than `0.875rem`.
+- At 390 px the root `html` font-size is `93.75%`, so every rem-based size
+  on the page scales down slightly.
+- At 410 px and below, the header brand and demo action use `0.9375rem` and
+  stay on one line.
 
 ### Layout
 
