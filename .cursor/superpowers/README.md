@@ -11,6 +11,8 @@ agent logs.
 
 ## Current specs
 
+- [Page-wide starfield background](./specs/2026-10-06-starfield-background-design.md)
+  — implemented 2026-10-06. Plan: [2026-10-06-starfield-background.md](./plans/2026-10-06-starfield-background.md).
 - [ГИП «Око» landing product specification](./specs/2026-10-02-landing-product-design.md)
   — implemented 2026-10-05. Plan: [2026-10-05-landing-product.md](./plans/2026-10-05-landing-product.md).
 - [Blender-to-landing render parity](./specs/2026-09-29-blender-parity-design.md)
@@ -20,6 +22,8 @@ agent logs.
 
 ## Current plans
 
+- [Page-wide starfield background](./plans/2026-10-06-starfield-background.md)
+  — **executed 2026-10-06; history only, do not re-run**.
 - [ГИП «Око» landing product rebuild](./plans/2026-10-05-landing-product.md)
   — **executed 2026-10-05; history only, do not re-run**.
 - [Blender render parity](./plans/2026-09-29-blender-render-parity.md)

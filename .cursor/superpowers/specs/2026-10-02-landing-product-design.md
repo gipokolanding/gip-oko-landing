@@ -400,7 +400,10 @@ Additional rules:
 - Avoid pill-shaped decorative tags.
 - Use corner radii only where they communicate a media frame or control
   boundary; do not apply one global radius to every surface.
-- Stars are sparse local CSS layers, not a stock image.
+- Stars are a local Canvas 2D field behind the whole page. Density, pointer
+  parallax, and the CSS fallback are owned by
+  `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
+  Do not use a stock image.
 
 ### Hero model and motion
 
@@ -456,6 +459,7 @@ src/
       hero-section.tsx
       hero-model.tsx
       background-model-canvas.tsx
+      star-field.tsx
       spatial-context-section.tsx
       analysis-tools-section.tsx
       final-cta-section.tsx
@@ -499,6 +503,10 @@ Responsibilities:
   - Owns all React Three Fiber and Three.js logic.
   - Loads the local GLB, configures rendering, and responds to permitted
     pointer and motion states.
+- `StarField`
+  - Client Component.
+  - Draws the page-wide Canvas 2D starfield.
+  - Must not use Three.js or share state with the GLB canvas.
 - `SpatialContextSection`
   - Renders the four data relationships as semantic content.
 - `AnalysisToolsSection`
@@ -514,8 +522,9 @@ Responsibilities:
 - `SectionHeading`
   - Shared semantic heading primitive without automatic eyebrow text.
 
-There is no global client state. Section content is static. Canvas state
-remains isolated within its client boundary.
+There is no global client state. Section content is static. The GLB canvas
+and the starfield are separate client islands and must not share refs,
+frame loops, or visibility observers.
 
 ## 7. Accessibility requirements
 
@@ -592,13 +601,15 @@ no long task causes a visibly delayed response.
 ### Rendering and JavaScript
 
 - `app/page.tsx` and all static sections remain Server Components.
-- Only the hero model wrapper and canvas ship client behavior.
-- Dynamically import the canvas with SSR disabled.
+- Only the hero model wrapper, the GLB canvas, and `StarField` ship client
+  behavior.
+- Dynamically import the GLB canvas with SSR disabled.
 - Do not load Three.js, React Three Fiber, Drei, or the GLB before the primary
-  HTML is usable.
-- Do not use continuous animation when the model is idle.
-- Pause or stop rendering when the hero is outside the viewport or the
-  document is hidden.
+  HTML is usable. `StarField` uses Canvas 2D only.
+- Do not use continuous animation when the model or starfield is idle.
+- Pause or stop GLB rendering when the hero is outside the viewport or the
+  document is hidden. The starfield pauses only when the document is hidden;
+  it keeps drawing after the hero leaves the viewport.
 - Use `frameloop="demand"` for static and reduced-motion states.
 - Cap device pixel ratio to the range 1–1.5.
 - Avoid layout effects and synchronous measurements in static sections.

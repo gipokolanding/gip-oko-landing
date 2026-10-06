@@ -6,8 +6,9 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
 # 3D Landing Checklist
 
 1. Read `AGENTS.md` and `.cursor/docs/brief.md`.
-2. Inspect `src/components/landing/background-model-canvas.tsx`, the local
-   GLB path, and the WebGL fallback before changing them.
+2. Inspect `src/components/landing/background-model-canvas.tsx`,
+   `src/components/landing/star-field.tsx`, the local GLB path, and the
+   WebGL fallback before changing the hero background.
 3. Keep Three.js and React Three Fiber code inside client components.
 4. Keep the GLB local at `public/models/background-model.glb` and below 5 MB.
    Export it from `.cursor/ai-assets/background-model.blend` without lights or
@@ -18,8 +19,10 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
    responsive readability, and absence of console errors.
 7. Run the Definition of Done commands owned by `AGENTS.md`.
 8. Compare the result with `.cursor/docs/brief.md` and
-   `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`, then fix
-   blockers before reporting completion.
+   `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`. For
+   starfield work also compare
+   `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
+   Fix blockers before reporting completion.
 
 ## Domain traps
 
@@ -37,3 +40,7 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
 - Do not keep the previous AI Core idle orbit. The landing model stays still
   until a fine-pointer device provides a subtle response. Pause rendering
   when the hero is off-screen or the document is hidden.
+- Page-wide stars live in `src/components/landing/star-field.tsx` as Canvas
+  2D. Do not add star particles to the GLB canvas or a second WebGL context.
+  Star density and pointer rules are owned by
+  `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
