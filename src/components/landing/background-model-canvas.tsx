@@ -21,6 +21,7 @@ import {
   Quaternion,
   SRGBColorSpace,
   Vector3,
+  setConsoleFunction,
   type MeshPhysicalMaterial,
   type MeshStandardMaterial,
 } from "three";
@@ -56,6 +57,23 @@ import {
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const MODEL_URL = `${BASE_PATH}/models/background-model.glb`;
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+// R3F v9 still constructs THREE.Clock in the Canvas store. Three r183+
+// warns on that constructor. Globe motion uses MotionClock, not Clock.
+const R3F_CLOCK_DEPRECATION =
+  "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.";
+
+setConsoleFunction((type, message, ...params) => {
+  if (type === "warn" && message === R3F_CLOCK_DEPRECATION) {
+    return;
+  }
+  const sink =
+    type === "error"
+      ? console.error
+      : type === "warn"
+        ? console.warn
+        : console.log;
+  sink(message, ...params);
+});
 
 type BackgroundModelCanvasProps = {
   onReady: () => void;
