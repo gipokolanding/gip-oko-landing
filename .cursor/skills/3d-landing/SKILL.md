@@ -61,6 +61,12 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   2D. Do not add star particles to the GLB canvas or a second WebGL context.
   Star density and pointer rules are owned by
   `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
+- Data (`#data`) is heading and copy on the left with four hover-reveal
+  cards on the right (local SVG motifs: raster, vector, relief, volume),
+  not the old text cell grid. Narrow widths stack cards under the copy
+  (four-across, then 2×2, then one column). Reduced motion drops blur and
+  scale. Owned by
+  `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`.
 - Tools (`#tools`) is a vertical carousel (16:9 visual, copy below), not
   the old five-cell text grid. Copy, motion, and 760 px progress hiding are
   owned by

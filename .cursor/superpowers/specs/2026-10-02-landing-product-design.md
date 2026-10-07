@@ -150,9 +150,14 @@ Required closing line:
 
 `Видимость, порядок и прозрачность слоёв настраиваются внутри одного рабочего пространства.`
 
-This content must be presented as relationships around one territory, not as
-four identical SaaS feature cards. The four groups fill a 2×2 grid without
-empty cells.
+Present the four groups as hover-reveal cards in `#data`, not as a plain
+text cell grid and not as stock-photo SaaS cards. Desktop keeps heading,
+intro, and closing copy on the left and a 2×2 card grid on the right. Below
+1080 px the cards move under the copy: four in one row, then 2×2, then one
+column. Each card uses a local schematic SVG motif (raster, vector, relief,
+volume) with a hairline instrument frame. Title and body stay visible; hover
+and keyboard focus enlarge the active card and de-emphasize the others.
+`prefers-reduced-motion` removes blur and scale. No remote images.
 
 ### Section 3 — Analysis tools
 
@@ -190,8 +195,8 @@ The five groups must not be rendered as equal rounded cards or as a
 five-cell grid. Present them as one vertical carousel in `#tools`: a 16:9
 visual on top (local CSS/SVG placeholders until product screenshots exist;
 no remote images), then the group title and items, then previous/next
-controls. The carousel block uses the same hairline frame as the spatial
-context cells. Slide height must not change between groups. The visual
+controls. The carousel block uses the same hairline instrument frame as the
+spatial cards in `#data`. Slide height must not change between groups. The visual
 width matches the section content width. Autoplay pauses on hover, keyboard
 focus, a hidden document, and `prefers-reduced-motion`. Progress labels sit
 under the arrows and are centered; at `max-width: 760px` hide everything
@@ -311,7 +316,9 @@ When the URL is absent in development:
 - Hero copy precedes the visual in DOM and reading order.
 - Navigation wraps or moves to a second row on narrow screens; it is not
   removed.
-- Data groups and tool groups become one-column content in logical order.
+- Data cards wrap from a two-column section (2×2 on the right) to stacked
+  copy-then-cards, then four-across, 2×2, and one column. Tool groups stay
+  in the `#tools` carousel.
 - No essential copy appears only on hover.
 
 ## 5. Visual direction
@@ -447,7 +454,7 @@ SaaS” result, the implementation must remove:
 - all-caps eyebrows above every heading;
 - numbered marketing sections;
 - gradient headline accents;
-- identical rounded feature cards;
+- stock-photo or identical rounded SaaS feature cards;
 - speculative app-shell chrome;
 - whole-assembly idle orbit from the previous AI Core canvas.
 
@@ -523,7 +530,8 @@ Responsibilities:
   - Draws the page-wide Canvas 2D starfield.
   - Must not use Three.js or share state with the GLB canvas.
 - `SpatialContextSection`
-  - Renders the four data relationships as semantic content.
+  - Renders the four data relationships as hover-reveal cards with local
+    SVG motifs in `#data`.
 - `ToolsElegantCarousel`
   - Client Component.
   - Renders the five task groups as a vertical carousel in `#tools`.
@@ -726,7 +734,8 @@ Until the product owner provides evidence and approves wording, do not claim:
 
 - The approved palette, Golos Text typography, left-aligned grid, and spacing
   system are implemented consistently.
-- The page does not default to identical rounded feature cards.
+- `#data` uses schematic hover-reveal cards, not stock-photo or rounded SaaS
+  cards. `#tools` stays a carousel, not a card grid.
 - The GLB is used only in the hero.
 - The model remains subordinate to the hero copy and CTA.
 - Desktop and 390 px layouts match the specified narrative and reading order.
