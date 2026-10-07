@@ -186,10 +186,18 @@ Required task groups:
 - `Управлять обзором`
   - `Выполняйте круговой облёт вокруг выбранной точки, переходите к виду «из глаз», просматривайте карту в 2D, 2,5D и 3D режимах, делайте снимки экрана без интерфейса приложения.`
 
-The five groups must not be rendered as equal rounded cards. Use an
-asymmetric editorial structure that reflects the different amount and type of
-content in each group. The first group spans the full row; the remaining four
-sit in two paired rows.
+The five groups must not be rendered as equal rounded cards or as a
+five-cell grid. Present them as one vertical carousel in `#tools`: a 16:9
+visual on top (local CSS/SVG placeholders until product screenshots exist;
+no remote images), then the group title and items, then previous/next
+controls. The carousel block uses the same hairline frame as the spatial
+context cells. Slide height must not change between groups. The visual
+width matches the section content width. Autoplay pauses on hover, keyboard
+focus, a hidden document, and `prefers-reduced-motion`. Progress labels sit
+under the arrows and are centered; at `max-width: 760px` hide everything
+below the arrows. Left and right arrow keys change slides when the carousel
+is focused. The section heading remains
+`Комплексные сценарии работы с данными`; the `#tools` anchor is unchanged.
 
 ### Section 4 — Final transition
 
@@ -466,7 +474,7 @@ src/
       background-model-canvas.tsx
       star-field.tsx
       spatial-context-section.tsx
-      analysis-tools-section.tsx
+      tools-elegant-carousel.tsx
       final-cta-section.tsx
       contacts-section.tsx
       demo-link.tsx
@@ -516,8 +524,9 @@ Responsibilities:
   - Must not use Three.js or share state with the GLB canvas.
 - `SpatialContextSection`
   - Renders the four data relationships as semantic content.
-- `AnalysisToolsSection`
-  - Renders four task groups in an asymmetric layout.
+- `ToolsElegantCarousel`
+  - Client Component.
+  - Renders the five task groups as a vertical carousel in `#tools`.
 - `FinalCtaSection`
   - Repeats the shared direct demo action.
 - `ContactsSection`
@@ -580,8 +589,8 @@ The target is WCAG 2.2 AA for the landing page.
 ### Motion
 
 - Respect `prefers-reduced-motion: reduce`.
-- Disable smooth scrolling, entrance animation, model rotation, and pointer
-  parallax in reduced-motion mode.
+- Disable smooth scrolling, entrance animation, model rotation, pointer
+  parallax, and tools-carousel autoplay in reduced-motion mode.
 - A static model or CSS fallback is acceptable.
 - Do not use flashing, rapid pulsing, or parallax that moves independently of
   user input.
@@ -608,8 +617,8 @@ no long task causes a visibly delayed response.
 ### Rendering and JavaScript
 
 - `app/page.tsx` and all static sections remain Server Components.
-- Only the hero model wrapper, the GLB canvas, and `StarField` ship client
-  behavior.
+- Only the hero model wrapper, the GLB canvas, `StarField`, and
+  `ToolsElegantCarousel` ship client behavior.
 - Dynamically import the GLB canvas with SSR disabled.
 - Do not load Three.js, React Three Fiber, Drei, or the GLB before the primary
   HTML is usable. `StarField` uses Canvas 2D only.
