@@ -46,6 +46,10 @@ skills. Every implementer and reviewer brief must:
 
 Do not attach unrelated skills or override `AGENTS.md`.
 
+When dispatching `Task` subagents, follow `AGENTS.md`: ask Evgeniy for the
+model before the first dispatch in a run; do not apply plugin SDD model tiers
+without that answer.
+
 ## Standing decisions
 
 After Evgeniy approves a lasting convention, update its owner:

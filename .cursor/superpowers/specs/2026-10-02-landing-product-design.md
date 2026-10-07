@@ -412,14 +412,19 @@ Additional rules:
   into unoccupied hero space.
 - It must not reduce text contrast or intercept CTA input.
 - On mobile it moves behind or below the copy without changing reading order.
-- Pointer response is subtle and available only for fine-pointer devices.
 - Touch input remains available for vertical page scrolling.
-- Do not use continuous idle rotation, orbit, or other motion while the
-  pointer is still. The previous AI Core canvas idle orbit is not part of
+- Pointer does not tilt or rotate the globe. Starfield parallax stays owned by
+  `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
+- Earth spins slowly on a ~23.5° geographic axis. Satellites travel their
+  rings. Rings do not spin with the continents. Speeds, sun, night lights,
+  matte Earth, ~70/30 day/night disk, key intensity after that frame, and
+  the Moscow-facing first frame are owned by
+  `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`.
+- The previous AI Core idle orbit of the whole assembly is not part of
   this landing.
+- Reduced motion produces an immediate static Moscow-facing frame.
 - The only orchestrated entrance is the hero copy and model becoming ready.
 - Sections must not use repeated fade-and-slide reveals.
-- Reduced motion produces an immediate static state.
 
 ### Uniqueness check
 
@@ -436,7 +441,7 @@ SaaS” result, the implementation must remove:
 - gradient headline accents;
 - identical rounded feature cards;
 - speculative app-shell chrome;
-- continuous idle orbit from the previous AI Core canvas.
+- whole-assembly idle orbit from the previous AI Core canvas.
 
 ## 6. Component structure
 
@@ -499,10 +504,12 @@ Responsibilities:
   - Small Client Component boundary.
   - Detects WebGL, handles canvas failure, and loads the 3D implementation
     dynamically with SSR disabled.
+  - The static fallback shows only while loading or when WebGL/GLB fails.
+    It is transparent (stars show through), not an instrument-colored plate.
 - `BackgroundModelCanvas`
   - Owns all React Three Fiber and Three.js logic.
-  - Loads the local GLB, configures rendering, and responds to permitted
-    pointer and motion states.
+  - Loads the local GLB, configures rendering, and runs the globe motion
+    allowed by reduced-motion and visibility states.
 - `StarField`
   - Client Component.
   - Draws the page-wide Canvas 2D starfield.
@@ -606,10 +613,14 @@ no long task causes a visibly delayed response.
 - Dynamically import the GLB canvas with SSR disabled.
 - Do not load Three.js, React Three Fiber, Drei, or the GLB before the primary
   HTML is usable. `StarField` uses Canvas 2D only.
-- Do not use continuous animation when the model or starfield is idle.
-- Pause or stop GLB rendering when the hero is outside the viewport or the
-  document is hidden. The starfield pauses only when the document is hidden;
-  it keeps drawing after the hero leaves the viewport.
+- The globe uses a continuous frame loop only while the hero is on-screen,
+  the document is visible, and reduced motion is off. Off-screen skips
+  frames but wall-clock pose still advances. Hidden document pauses the
+  clock. Starfield motion stays owned by the starfield spec.
+- Skip GLB frames when the hero is outside the viewport or the document is
+  hidden (pose still comes from the wall clock unless the document is hidden).
+  The starfield pauses only when the document is hidden; it keeps drawing
+  after the hero leaves the viewport.
 - Use `frameloop="demand"` for static and reduced-motion states.
 - Cap device pixel ratio to the range 1–1.5.
 - Avoid layout effects and synchronous measurements in static sections.

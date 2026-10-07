@@ -68,16 +68,20 @@ export function HeroModel() {
     () => false,
   );
   const [sceneFailed, setSceneFailed] = useState(false);
-  const handleReady = useCallback(() => undefined, []);
+  const [ready, setReady] = useState(false);
+  const handleReady = useCallback(() => setReady(true), []);
   const handleError = useCallback(() => setSceneFailed(true), []);
 
   if (!webGLAvailable || sceneFailed) {
-    return null;
+    return <div className="hero-visual-fallback" />;
   }
 
   return (
-    <SceneBoundary onError={handleError}>
-      <BackgroundModelCanvas onReady={handleReady} />
-    </SceneBoundary>
+    <>
+      {!ready ? <div className="hero-visual-fallback" /> : null}
+      <SceneBoundary onError={handleError}>
+        <BackgroundModelCanvas onReady={handleReady} />
+      </SceneBoundary>
+    </>
   );
 }

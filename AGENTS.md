@@ -41,6 +41,10 @@
    checkout, switch, and merge. Do not add remotes, fetch, pull, push, or
    change Git configuration. Evgeniy is the only one who pushes to a remote.
 9. Append completed work to the dated Superpowers log.
+10. Before dispatching a Cursor `Task` subagent, **ask Evgeniy which model to
+    use** (for example inherit the parent session model vs a named slug). Do
+    not choose a subagent model silently, including Superpowers SDD cost-tier
+    picks. One answer may cover a whole plan run unless Evgeniy says otherwise.
 
 ## Definition of done
 

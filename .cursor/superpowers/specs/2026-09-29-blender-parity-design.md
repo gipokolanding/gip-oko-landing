@@ -40,14 +40,14 @@ runtime lighting.
 - `gl.outputColorSpace = SRGBColorSpace`
 - `gl.toneMapping = AgXToneMapping`
 - `gl.toneMappingExposure = 0.8`
-- Existing landing light rig (ambient 0.55, hemisphere 1.45, directional 2.6,
-  point 8) with unchanged colors and positions
+- Light rig owned by
+  `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`:
+  Blender `Light_Key` sun, `Light_Rim` fill, dim hemisphere. No cyan/violet
+  studio keys. No `KHR_lights_punctual`.
 - `basePath` handling, reduced-motion demand loop, loading state, and WebGL
   fallback remain part of this pipeline
 - Camera framing may change with the landing layout
-- Idle orbit and other continuous animation are not part of this contract.
-  Motion is owned by
-  `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`
+- Motion is owned by the hero globe runtime spec, not this color-pipeline spec.
 
 The landing preserves authored material colors in WebGL. It does not bake the
 Blender image into CSS or a billboard.
@@ -58,8 +58,8 @@ Blender image into CSS or a billboard.
 - Local URL and production `basePath` behavior are unchanged.
 - GLB load or WebGL failures use the existing static fallback.
 - Reduced motion keeps a static model and a demand-driven frame loop.
-- The page remains usable without pointer input; pointer movement stays an
-  optional decorative enhancement.
+- The page remains usable without pointer input. Globe motion does not use the
+  pointer.
 
 ## Out of scope
 

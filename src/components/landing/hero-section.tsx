@@ -19,7 +19,6 @@ export function HeroSection({ demo }: HeroSectionProps) {
         </div>
       </div>
       <div className="hero-visual" aria-hidden="true">
-        <div className="hero-visual-fallback" />
         <HeroModel />
       </div>
     </section>

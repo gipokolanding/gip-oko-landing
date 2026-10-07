@@ -21,7 +21,9 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
 8. Compare the result with `.cursor/docs/brief.md` and
    `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`. For
    starfield work also compare
-   `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
+   `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`. For
+   GLB canvas work also compare
+   `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`.
    Fix blockers before reporting completion.
 
 ## Domain traps
@@ -34,12 +36,26 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   more R3F lights.
 - Architecture for this pipeline lives in
   `.cursor/superpowers/specs/2026-09-29-blender-parity-design.md`.
-  Color management is that spec. Hero motion, idle animation, and pointer
-  response are owned by
-  `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`.
-- Do not keep the previous AI Core idle orbit. The landing model stays still
-  until a fine-pointer device provides a subtle response. Pause rendering
-  when the hero is off-screen or the document is hidden.
+  Color management is that spec.
+- Do not restore the previous AI Core idle orbit of the whole assembly.
+  Earth axial spin, satellite ring travel, sun, night lights, and the
+  Moscow-facing frame are owned by
+  `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`.
+  Spin around `EARTH_SPIN_AXIS` (Arctic/Antarctic in the land UVs). Do
+  not spin around object +Y and do not add a second 23.5° tilt — the
+  obliquity is already in the GLB. Earth roughness/metalness are a
+  canvas override (`EARTH_ROUGHNESS` 0.85); do not use the land mask as
+  a roughness map.   Camera is `heroCameraPosition()` around the same
+  spin axis (~70/30 day/night disk). `camera.up` is `EARTH_SPIN_AXIS`
+  so geographic north is 12 o’clock.
+  Canvas sun keeps blend Light_Key X/Z; Three Y is lowered so
+  `sun · north ≈ sin(23.5°)`. After that Y change, retune
+  `CAMERA_AZIMUTH_RAD` (and Moscow yaw by the same Δ). Do not move
+  `Light_Rim` or the `.blend` lights. Keep `SUN_INTENSITY` 6.6.
+  Pause the clock when the document is hidden. Off-screen may skip
+  frames but must not freeze Earth. Reduced motion is a static first
+  frame. Satellites: inner period `SAT_PERIOD_S` (55 s); mid ×1.5;
+  high ×2. All start 180°; high orbit adds 45° along travel.
 - Page-wide stars live in `src/components/landing/star-field.tsx` as Canvas
   2D. Do not add star particles to the GLB canvas or a second WebGL context.
   Star density and pointer rules are owned by
