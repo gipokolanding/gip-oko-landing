@@ -1,5 +1,7 @@
 # Hero globe look pass Implementation Plan
 
+> **Status:** executed 2026-10-07. History only — do not re-run.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the hero Earth matte, frame about 70% day / 30% night, and raise day-side brightness toward the Blender Rendered reference.

@@ -39,18 +39,19 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   Color management is that spec.
 - Do not restore the previous AI Core idle orbit of the whole assembly.
   Earth axial spin, satellite ring travel, sun, night lights, and the
-  Moscow-facing frame are owned by
+  Siberia-facing first frame are owned by
   `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`.
   Spin around `EARTH_SPIN_AXIS` (Arctic/Antarctic in the land UVs). Do
   not spin around object +Y and do not add a second 23.5° tilt — the
   obliquity is already in the GLB. Earth roughness/metalness are a
-  canvas override (`EARTH_ROUGHNESS` 0.85); do not use the land mask as
-  a roughness map.   Camera is `heroCameraPosition()` around the same
-  spin axis (~70/30 day/night disk). `camera.up` is `EARTH_SPIN_AXIS`
+  canvas override (`EARTH_ROUGHNESS` 0.85); do not use the land map as
+  a roughness map. `EarthLandMask` is the two-color green-land /
+  blue-ocean mask. Camera is `heroCameraPosition()` around the same
+  spin axis (~80/20 day/night disk). `camera.up` is `EARTH_SPIN_AXIS`
   so geographic north is 12 o’clock.
   Canvas sun keeps blend Light_Key X/Z; Three Y is lowered so
   `sun · north ≈ sin(23.5°)`. After that Y change, retune
-  `CAMERA_AZIMUTH_RAD` (and Moscow yaw by the same Δ). Do not move
+  `CAMERA_AZIMUTH_RAD` (and `FACING_YAW_RAD` by the same Δ). Do not move
   `Light_Rim` or the `.blend` lights. Keep `SUN_INTENSITY` 6.6.
   Pause the clock when the document is hidden. Off-screen may skip
   frames but must not freeze Earth. Reduced motion is a static first

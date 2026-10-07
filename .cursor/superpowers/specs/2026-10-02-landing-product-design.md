@@ -417,12 +417,12 @@ Additional rules:
   `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
 - Earth spins slowly on a ~23.5° geographic axis. Satellites travel their
   rings. Rings do not spin with the continents. Speeds, sun, night lights,
-  matte Earth, ~70/30 day/night disk, key intensity after that frame, and
-  the Moscow-facing first frame are owned by
+  matte Earth, ~80/20 day/night disk, key intensity after that frame, and
+  the Siberia-facing first frame are owned by
   `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`.
 - The previous AI Core idle orbit of the whole assembly is not part of
   this landing.
-- Reduced motion produces an immediate static Moscow-facing frame.
+- Reduced motion produces an immediate static Siberia-facing frame.
 - The only orchestrated entrance is the hero copy and model becoming ready.
 - Sections must not use repeated fade-and-slide reveals.
 

@@ -34,7 +34,7 @@ import {
   FILL_GROUND,
   FILL_INTENSITY,
   FILL_SKY,
-  MOSCOW_YAW_RAD,
+  FACING_YAW_RAD,
   NIGHT_DOT_DAY,
   NIGHT_DOT_NIGHT,
   OBJECT_NAMES,
@@ -311,7 +311,7 @@ function Model({
       reducedMotion,
     );
     const earthAngle =
-      MOSCOW_YAW_RAD +
+      FACING_YAW_RAD +
       (reducedMotion ? 0 : (seconds / EARTH_PERIOD_S) * Math.PI * 2);
     earthRef.current.quaternion.setFromAxisAngle(
       new Vector3(...EARTH_SPIN_AXIS),
@@ -332,7 +332,7 @@ function Model({
     applyEarthLook(earth);
     applyNightLights(earth);
 
-    // t = 0 is the moment the GLB is ready, so load time does not yaw Moscow.
+    // t = 0 is the moment the GLB is ready, so load time does not yaw the shot.
     const rebaseClock = () => {
       if (clockRebased.current) {
         return;

@@ -22,13 +22,14 @@ geometry or texture loading:
 
 ## Current asset
 
-The generated GLB is exported from the unchanged source
+The generated GLB is exported from
 `.cursor/ai-assets/background-model.blend` through Blender's glTF exporter.
 
 - Path: `public/models/background-model.glb`
-- Size: 2,292,904 bytes (below 5 MB)
+- Size: 2,247,760 bytes (below 5 MB)
 - Preserved: meshes, hierarchy, embedded textures, PBR and emissive materials,
   object transforms
+- Land albedo: two-color `EarthLandMask` (green continents, blue ocean)
 - Excluded: Blender lights, camera, and baked animation
 - Contract: no `KHR_lights_punctual`, no light nodes, no cameras
 
@@ -64,6 +65,8 @@ Blender image into CSS or a billboard.
 ## Out of scope
 
 - Redesigning the hero or changing its copy
-- Rebuilding geometry, textures, or satellite models
-- Adding remote environment maps, post-processing packages, or new assets
-- Changing the Blender source's intended visual design
+- Rebuilding geometry or satellite models. Land albedo is owned by the
+  hero globe runtime spec.
+- Adding remote environment maps, post-processing packages, or runtime
+  remote assets
+- Changing hero copy, satellite models, or the canvas light architecture

@@ -1,5 +1,7 @@
 # Hero globe runtime Implementation Plan
 
+> **Status:** executed 2026-10-07. History only — do not re-run.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the hero GLB match the Blender sun and satellite materials, face Moscow on a 23.5° axis, spin the Earth, fly satellites on their rings, and show city lights only on the night side, with a transparent canvas.

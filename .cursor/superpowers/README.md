@@ -12,9 +12,9 @@ agent logs.
 ## Current specs
 
 - [Hero globe runtime](./specs/2026-10-06-hero-globe-runtime-design.md)
-  — approved design; look pass (matte Earth, 70/30 frame, day-side
-  brightness) not implemented. Plan:
-  [2026-10-06-hero-globe-runtime.md](./plans/2026-10-06-hero-globe-runtime.md).
+  — implemented 2026-10-07. Plans:
+  [2026-10-06-hero-globe-runtime.md](./plans/2026-10-06-hero-globe-runtime.md),
+  [2026-10-07-hero-globe-look.md](./plans/2026-10-07-hero-globe-look.md).
 - [Page-wide starfield background](./specs/2026-10-06-starfield-background-design.md)
   — implemented 2026-10-06. Plan: [2026-10-06-starfield-background.md](./plans/2026-10-06-starfield-background.md).
 - [ГИП «Око» landing product specification](./specs/2026-10-02-landing-product-design.md)
@@ -27,9 +27,9 @@ agent logs.
 ## Current plans
 
 - [Hero globe look pass](./plans/2026-10-07-hero-globe-look.md)
-  — not executed; matte Earth, 70/30 frame, day-side key.
+  — **executed 2026-10-07; history only, do not re-run**.
 - [Hero globe runtime](./plans/2026-10-06-hero-globe-runtime.md)
-  — not executed; do not start until Evgeniy picks an execution mode.
+  — **executed 2026-10-07; history only, do not re-run**.
 - [Page-wide starfield background](./plans/2026-10-06-starfield-background.md)
   — **executed 2026-10-06; history only, do not re-run**.
 - [ГИП «Око» landing product rebuild](./plans/2026-10-05-landing-product.md)

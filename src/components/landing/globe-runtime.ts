@@ -11,9 +11,10 @@ export const SAT_PHASE_FLIP_RAD = Math.PI;
 /** Extra start along the high orbit, in the direction of travel. */
 export const SAT_HIGH_EXTRA_RAD = Math.PI / 4;
 export const CAMERA_DISTANCE = 4.5;
-// Around EARTH_SPIN_AXIS so sunToward · camera ≈ 0.4 (~70% day).
-export const CAMERA_AZIMUTH_RAD = 0.794;
-export const MOSCOW_YAW_RAD = -1.7818;
+// Around EARTH_SPIN_AXIS so sunToward · camera ≈ 0.6 (~80% day).
+export const CAMERA_AZIMUTH_RAD = 1.054;
+// t = 0 faces Central Siberia (Novosibirsk ~83° E), not Moscow.
+export const FACING_YAW_RAD = -2.3124;
 
 // Geographic north (Arctic UV pole) in Three object space. Already ~23.5°
 // from +Y in the GLB — do not add a second tilt around world Z.

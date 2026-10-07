@@ -1,27 +1,25 @@
 # Hero globe runtime: lighting, frame, night lights, motion
 
-**Status:** approved design. Look pass (matte Earth, 70/30 frame, day-side
-brightness) not implemented.
+**Status:** implemented 2026-10-07
 
 ## Document purpose
 
 This document is the implementation source of truth for the hero GLB’s
-runtime look and motion: transparent canvas, Blender-matched sun, Moscow
+runtime look and motion: transparent canvas, Blender-matched sun, Siberia
 facing shot, axial spin, satellites on their rings, and city lights only
 on the night side. It also owns the 2026-10-07 look pass: runtime Earth
-PBR (matte planet, not a specular ball), camera azimuth for about **70%
-day / 30% night** on the visible disk, and key intensity after that frame.
+PBR (matte planet, not a specular ball), camera azimuth for about **80%
+day / 20% night** on the visible disk, and key intensity after that frame.
 
 The published page remains Russian-language. This specification is written
 in English for the implementation team.
 
 If this document conflicts with product-safety restrictions in
 `.cursor/docs/brief.md`, the brief wins. Hero copy, CTA, starfield, and
-AgX/sRGB color management stay owned by their existing specs. Where this
-document conflicts with the product spec or 3d-landing skill on **GLB
-motion, pointer response, the canvas light rig, Earth PBR overrides, or
-camera azimuth**, this document wins until those owners are aligned after
-implementation.
+AgX/sRGB color management stay owned by their existing specs. This
+document owns **GLB motion, pointer response, the canvas light rig,
+Earth PBR overrides, and camera azimuth**; the product spec and
+3d-landing skill point here.
 
 ## Context
 
@@ -34,52 +32,39 @@ implementation.
   materials. Before this spec the landing replaced that sun with a
   cyan/violet rig, tilted the whole group on pointer move, showed city
   lights as a baked always-on emissive, and drew white satellites because
-  Mix Shader rims do not survive glTF export. The working tree now owns
-  the canvas sun, axial spin, and night mask; the remaining gap is the
-  look pass below.
+  Mix Shader rims do not survive glTF export. The canvas now owns the
+  sun, axial spin, night mask, matte Earth PBR override, and 80/20
+  camera azimuth.
 - The blend scene is static. Night lights on the currently dark
   hemisphere are a shader mask, not a baked half-map. `EarthCityLights`
   is a full-globe city map (Europe and Moscow are present in the texture;
   oceans and Sahara are dark).
 
-Look pass (working tree, after the 2026-10-06 runtime):
+Look pass (closed 2026-10-07; started as ~70/30, shipped ~80/20):
 
-1. Day-side Earth is darker than the Blender Rendered source.
-2. The surface shows a hard glossy highlight, like a polished sphere.
-3. The current view is about 50/50 day/night; the shot should be about
-   70/30, by moving the camera around Earth’s spin axis toward the sun.
-
-Blend vs GLB vs canvas for that pass:
-
-- Blender `Mat_EarthGlobe`: metallic 0, Specular IOR Level **0.06**,
-  roughness from a Color Ramp **0.64–0.90**. `Light_Key` energy **12**.
-  View transform AgX, exposure **0**.
-- GLB `Mat_EarthGlobe` uses the color `EarthLandMask` as
-  `metallicRoughnessTexture`. glTF roughness is the green channel, so
-  blue oceans become near-zero roughness. `MeshStandardMaterial` does
-  not apply Principled 0.06 specular. That is the billiard highlight.
-- Canvas: `SUN_INTENSITY = 2.2`, `toneMappingExposure = 0.8`, camera
-  `[0, 0, 4.5]`. Sun direction in Three.js is about
-  `(0.428, 0.895, −0.125)`. Illuminated disk fraction
-  `(1 + sunToward · cameraFromGlobe) / 2` is about **0.44**.
-- Earth spin does not change that fraction. Only camera-versus-sun
-  geometry does. Do not move the sun to fake the 70/30 ratio — use
-  camera azimuth. The canvas may lower Light_Key’s Three Y for
-  declination (southern Africa in day); that is not a 70/30 cheat.
+The runtime GLB used the color `EarthLandMask` as
+`metallicRoughnessTexture`, so blue oceans became near-zero roughness
+and `MeshStandardMaterial` ignored Principled specular 0.06. The canvas
+overrides Earth roughness/metalness. Camera azimuth around the spin
+axis sets the day/night disk fraction; do not move the sun to fake it.
+The canvas may lower Light_Key’s Three Y for Earth-like declination;
+that is not an 80/20 cheat. Blend `Mat_EarthGlobe` stays metallic 0,
+Specular IOR Level **0.06**, roughness Color Ramp **0.64–0.90**,
+`Light_Key` energy **12**.
 
 ## Goal
 
 The hero globe reads as the Blender Rendered reference in space: stars
 show around it, satellites keep their authored materials, a warm sun
-lights the Earth from the source `Light_Key` direction, Eastern Europe /
-European Russia (Moscow) faces the camera at t = 0, Earth spins on a
+lights the Earth from the source `Light_Key` direction, Central Siberia
+faces the camera at t = 0, Earth spins on a
 ~23.5° axis, satellites travel their rings, and city clusters appear only
 where that sun does not light the surface — including Europe once that
 land rotates into shadow.
 
 Day-side land reads closer to the Blender Rendered reference than the
 2.2 / 0.8 / 50-50 shot. The globe is a matte planet, not a specular
-ball. The visible disk is about 70% sunlit and 30% night, so fewer city
+ball. The visible disk is about 80% sunlit and 20% night, so fewer city
 lights sit in the first view.
 
 ## Non-goals
@@ -90,7 +75,8 @@ lights sit in the first view.
 - Do not restore pointer-driven tilt or the previous AI Core idle orbit of
   the whole assembly.
 - Do not rebuild globe or satellite geometry, replace `EarthCityLights`, or
-  paint new cities.
+  paint new cities. Keep the two-color `EarthLandMask` (green land, blue
+  ocean); do not use a photographic Earth map.
 - Do not change hero copy, CTA, starfield parallax, or page layout.
 - Do not tilt the camera into an oblique cinematic shot or copy
   `Camera_Hero` (closer, 50 mm) as the landing camera.
@@ -106,11 +92,11 @@ lights sit in the first view.
 
 | Concern | Owner |
 | --- | --- |
-| Satellite Principled materials, Earth emissive map export | `.blend` via Blender MCP, then re-export GLB |
+| Satellite Principled materials, Earth emissive map, land albedo | `.blend` via Blender MCP, then re-export GLB |
 | Sun, rim, fill, camera, spin, satellite orbits, night mask | `background-model-canvas.tsx` |
 | Earth roughness / metalness at runtime | `background-model-canvas.tsx` + `globe-runtime.ts` |
 | Camera azimuth around the spin axis | same |
-| Key intensity after the 70/30 frame | `SUN_INTENSITY` in `globe-runtime.ts` |
+| Key intensity after the 80/20 frame | `SUN_INTENSITY` in `globe-runtime.ts` |
 | AgX, sRGB, exposure 0.8, no lights in GLB | [Blender parity spec](./2026-09-29-blender-parity-design.md) |
 | Hero copy, layout, CTA | [Landing product spec](./2026-10-02-landing-product-design.md) |
 | Page-wide stars | [Starfield spec](./2026-10-06-starfield-background-design.md) |
@@ -128,15 +114,15 @@ Edit `.cursor/ai-assets/background-model.blend` only as needed for glTF:
    BSDF** directly to Material Output. Keep existing base color, metallic,
    roughness, and Principled emission. Disconnect the `SatRim_Mix` /
    `Layer Weight` graphs and leave those nodes unused (they export as white).
-2. `Mat_EarthGlobe`: keep `EarthLandMask` on base color. Keep
-   `EarthCityLights` as the emissive color map. Do **not** bake the
+2. `Mat_EarthGlobe`: keep `EarthLandMask` on base color. That image is
+   the two-color land/ocean mask (green continents, dark-blue water).
+   Keep `EarthCityLights` as the emissive color map. Do **not** bake the
    night-side math (`CityLights_Dot` / `Map Range`) into a static
    emission strength that glTF will treat as always on. Export the city
    map so the canvas can modulate it.
 3. Leave `Light_Key`, `Light_Rim`, and `Camera_Hero` in the blend for
    authoring. Export **without** lights and camera, as today.
-4. Do not change globe/ring/satellite meshes or the packed land and city
-   images.
+4. Do not change globe/ring/satellite meshes or the packed city image.
 
 Write `public/models/background-model.glb` below 5 MB, with no
 `KHR_lights_punctual`, no light nodes, no cameras.
@@ -155,7 +141,7 @@ Replace it with:
   day, southern Africa always night. Canvas Three Y is **0.83** so
   `sun · north ≈ sin(23.5°)`; X/Z stay the blend values. The light is
   **not** parented to `Core_Earth`. Calibrate intensity **after** the
-  matte Earth override and the 70/30 camera (those two already raise
+  matte Earth override and the 80/20 camera (those two already raise
   mean disk luminance). Calibrated value: `SUN_INTENSITY = 6.6` (from
   2.2 via 4.2; Evgeniy still found 4.2 too dark). Day-side land is
   brighter without a clipped white cap. Do not copy Blender
@@ -166,7 +152,7 @@ Replace it with:
   key still cannot match the blend without clipping, then and only
   then raise `toneMappingExposure` by 0.1 toward 1.0 and document the
   value here. After any Y change, retune `CAMERA_AZIMUTH_RAD` so the
-  disk stays ~70/30, and shift `MOSCOW_YAW_RAD` by the same Δ.
+  disk stays ~80/20, and shift `FACING_YAW_RAD` by the same Δ.
 - **Rim:** one `pointLight` matching `Light_Rim`: color
   `(0.25, 0.32, 0.45)`, position from the blend (same Y-up conversion),
   low energy. Fills the night limb; it is not city lights.
@@ -199,24 +185,24 @@ proves another exposure.
   north sits at **12 o’clock** on the disk. Do not guess roll angles.
 - Place the camera by rotating `[0, 0, 4.5]` around
   `EARTH_SPIN_AXIS` (right-hand rule) toward **+X** so
-  `sunToward · normalize(cameraPosition) ≈ 0.4`
-  (illuminated-disk fraction `(1 + cos φ) / 2 ≈ 0.70`). After the
-  declination Y drop: **`CAMERA_AZIMUTH_RAD = 0.794`** (~45.5°). Named
+  `sunToward · normalize(cameraPosition) ≈ 0.6`
+  (illuminated-disk fraction `(1 + cos φ) / 2 ≈ 0.80`). After the
+  declination Y drop: **`CAMERA_AZIMUTH_RAD = 1.054`** (~60.4°). Named
   constant; tune in the browser without changing this architecture.
 - Geographic north is locked to screen-up (12 o’clock). The GLB already
   places Arctic/Antarctic ~23.5° from object +Y (land UV poles). Spin
   around that authored axis (`EARTH_SPIN_AXIS`). Do **not** add a second
   23.5° tilt around world Z — that made the poles orbit the geometric Y
   axis.
-- At t = 0, the facing hemisphere is Eastern Europe / European Russia.
-  Landmark: Moscow (~37.6° E, 55.8° N) in the front hemisphere, readable
+- At t = 0, the facing hemisphere is Central Siberia.
+  Landmark: Novosibirsk (~83° E, 55° N) in the front hemisphere, readable
   as the facing region, not a pixel-perfect geodetic lock.
-- Yaw around `EARTH_SPIN_AXIS` until Moscow faces the **new** camera
-  (`MOSCOW_YAW_RAD = -1.7818`). Do not rotate Earth off its geographic
+- Yaw around `EARTH_SPIN_AXIS` until that land faces the **new** camera
+  (`FACING_YAW_RAD = -2.3124`). Do not rotate Earth off its geographic
   axis to fake the shot. Rings stay world-fixed; they may read at a
   new azimuth. That is expected. Reduced motion uses this same camera
   and yaw.
-- Do not author a separate terminator. The 70/30 split is camera-versus-
+- Do not author a separate terminator. The 80/20 split is camera-versus-
   sun geometry, not a painted night map.
 
 ## Earth material (matte)
@@ -234,7 +220,7 @@ the loader created a `MeshPhysicalMaterial`, also set specular intensity
 to match Principled 0.06 (about **0.12** of Three’s default 0.5); if it
 is `MeshStandardMaterial`, the roughness override is enough.
 
-Look-pass order: (1) matte override, (2) camera azimuth + Moscow yaw,
+Look-pass order: (1) matte override, (2) camera azimuth + facing yaw,
 (3) `SUN_INTENSITY`, then exposure only if needed. Files:
 `globe-runtime.ts` and `background-model-canvas.tsx`. No GLB rewrite.
 
@@ -278,7 +264,7 @@ travel (`SAT_HIGH_EXTRA_RAD`) so it is further along on the first frames.
   not freeze** the pose. Scrolling back shows the globe further along.
 - When `document.hidden` is true, **pause** the clock (no jump while the
   tab is in the background). Resume from the paused angle.
-- `prefers-reduced-motion: reduce`: static first frame (Moscow facing,
+- `prefers-reduced-motion: reduce`: static first frame (Siberia facing,
   sun, night lights as they are at t = 0). No Earth spin, no satellite
   motion. `frameloop="demand"` in that state.
 - Visible hero and no reduced motion: continuous `frameloop` so spin
@@ -329,10 +315,10 @@ Desktop, motion allowed:
 1. Empty pixels around the globe show page stars, not a dark-blue plate.
 2. Satellites read as metal / gold / solar / cyan / violet, not white
    unshaded hulls.
-3. First frame faces Eastern Europe / European Russia (Moscow), frontal.
+3. First frame faces Central Siberia (Novosibirsk as landmark), frontal.
    Geographic north is at 12 o’clock on the disk. Earth still spins on
    the authored ~23.5° axis in the GLB.
-4. Visible disk is about 70% day / 30% night (terminator toward one
+4. Visible disk is about 80% day / 20% night (terminator toward one
    limb, not a vertical 50/50 split). No hard specular cap on the
    oceans; land and water read matte. Day-side land is closer to the
    Blender Rendered source than the 2.2 / 0.8 / 50-50 shot, without a
@@ -351,7 +337,7 @@ Desktop, motion allowed:
 
 Also:
 
-- Reduced motion: static Moscow frame, no spin.
+- Reduced motion: static Siberia frame, no spin.
 - Hidden tab: clock paused.
 - 390 px, keyboard, no-mouse: page works; globe is not a control.
 - GLB below 5 MB, no lights/cameras in the file.
