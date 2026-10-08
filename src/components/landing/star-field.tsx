@@ -154,7 +154,7 @@ export function StarField() {
     let hidden = document.hidden;
     const parallax = finePointer && !reducedMotion;
 
-    function draw() {
+    const draw = () => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, cssW, cssH);
       for (const layer of layers) {
@@ -173,9 +173,9 @@ export function StarField() {
           ctx.fill();
         }
       }
-    }
+    };
 
-    function resize() {
+    const resize = () => {
       const rect = canvas.getBoundingClientRect();
       cssW = rect.width;
       cssH = rect.height;
@@ -184,9 +184,9 @@ export function StarField() {
       canvas.height = Math.max(1, Math.round(cssH * dpr));
       layers = buildLayers(cssW, cssH);
       draw();
-    }
+    };
 
-    function tick() {
+    const tick = () => {
       running = false;
       raf = 0;
       if (hidden) {
@@ -206,27 +206,27 @@ export function StarField() {
         currentY = targetY;
         draw();
       }
-    }
+    };
 
-    function requestTick() {
+    const requestTick = () => {
       if (!running && !hidden) {
         running = true;
         raf = requestAnimationFrame(tick);
       }
-    }
+    };
 
-    function onMove(event: PointerEvent) {
+    const onMove = (event: PointerEvent) => {
       targetX = (event.clientX / window.innerWidth) * 2 - 1;
       targetY = (event.clientY / window.innerHeight) * 2 - 1;
       requestTick();
-    }
+    };
 
-    function onVisibility() {
+    const onVisibility = () => {
       hidden = document.hidden;
       if (!hidden && parallax) {
         requestTick();
       }
-    }
+    };
 
     resize();
     const observer = new ResizeObserver(resize);

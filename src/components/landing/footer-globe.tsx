@@ -123,28 +123,28 @@ export function FooterGlobe() {
     let cancelled = false;
     reducedMotionRef.current = reducedMotion;
 
-    function hostVisible() {
+    const hostVisible = () => {
       const rect = host.getBoundingClientRect();
       return (
         rect.width > 0 && rect.bottom > 0 && rect.top < window.innerHeight
       );
-    }
+    };
 
-    function paint() {
-      if (!svg || sizeRef.current <= 0 || featuresRef.current.length === 0) {
+    const paint = () => {
+      if (sizeRef.current <= 0 || featuresRef.current.length === 0) {
         return;
       }
       drawGlobe(svg, featuresRef.current, sizeRef.current, rotationRef.current);
-    }
+    };
 
-    function stopLoop() {
+    const stopLoop = () => {
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = 0;
       }
-    }
+    };
 
-    function tick() {
+    const tick = () => {
       rafRef.current = 0;
       if (
         reducedMotionRef.current ||
@@ -159,9 +159,9 @@ export function FooterGlobe() {
       ];
       paint();
       rafRef.current = requestAnimationFrame(tick);
-    }
+    };
 
-    function startLoop() {
+    const startLoop = () => {
       if (
         rafRef.current ||
         reducedMotionRef.current ||
@@ -171,24 +171,24 @@ export function FooterGlobe() {
         return;
       }
       rafRef.current = requestAnimationFrame(tick);
-    }
+    };
 
-    function resize() {
+    const resize = () => {
       const width = host.offsetWidth || 0;
       sizeRef.current = width;
       svg.setAttribute("width", String(width));
       svg.setAttribute("height", String(width));
       paint();
-    }
+    };
 
-    function onVisibility() {
+    const onVisibility = () => {
       hiddenRef.current = document.hidden;
       if (hiddenRef.current) {
         stopLoop();
       } else {
         startLoop();
       }
-    }
+    };
 
     hiddenRef.current = document.hidden;
     visibleRef.current = hostVisible();
