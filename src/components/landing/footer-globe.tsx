@@ -11,7 +11,8 @@ const COUNTRY_OPACITY = 0.45;
 const OUTLINE_OPACITY = 0.8;
 const ABYSS = "#05070b";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-const TOPOLOGY_URL = "/data/countries-110m.json";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const TOPOLOGY_URL = `${BASE_PATH}/data/countries-110m.json`;
 
 type WorldAtlasTopology = {
   type: "Topology";

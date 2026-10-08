@@ -25,6 +25,8 @@
 - React Three Fiber, Drei, and Three.js.
 - Application code: `src/`.
 - 3D model: `public/models/background-model.glb`.
+- Production is a static export (`output: "export"`). The site is served
+  from the host root unless `NEXT_PUBLIC_BASE_PATH` is set at build time.
 
 ## Working rules
 
