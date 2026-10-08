@@ -11,6 +11,9 @@ agent logs.
 
 ## Current specs
 
+- [Contacts footer with cropped wireframe globe](./specs/2026-10-07-footer-globe-design.md)
+  — implemented 2026-10-07; peek ratio and owner requisites 2026-10-08.
+  No implementation plan (Evgeniy skipped it).
 - [Hero globe runtime](./specs/2026-10-06-hero-globe-runtime-design.md)
   — implemented 2026-10-07. Plans:
   [2026-10-06-hero-globe-runtime.md](./plans/2026-10-06-hero-globe-runtime.md),
@@ -19,7 +22,8 @@ agent logs.
   — implemented 2026-10-06. Plan: [2026-10-06-starfield-background.md](./plans/2026-10-06-starfield-background.md).
 - [ГИП «Око» landing product specification](./specs/2026-10-02-landing-product-design.md)
   — implemented 2026-10-05; tools carousel 2026-10-07; spatial hover cards
-  2026-10-07. Plan: [2026-10-05-landing-product.md](./plans/2026-10-05-landing-product.md).
+  2026-10-07; contacts footer 2026-10-08. Plan:
+  [2026-10-05-landing-product.md](./plans/2026-10-05-landing-product.md).
 - [Blender-to-landing render parity](./specs/2026-09-29-blender-parity-design.md)
   — implemented 2026-09-29.
 - [Project agent workflow](./specs/2026-09-29-project-agent-workflow-design.md)

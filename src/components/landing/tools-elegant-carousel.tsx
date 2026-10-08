@@ -52,6 +52,18 @@ function useMediaQuery(query: string) {
   );
 }
 
+function progressFillWidth(
+  index: number,
+  activeIndex: number,
+  progress: number,
+  paused: boolean,
+): string {
+  if (index < activeIndex) return "100%";
+  if (index > activeIndex) return "0%";
+  if (paused && progress <= 0) return "100%";
+  return `${Math.min(100, Math.max(0, progress))}%`;
+}
+
 function MotifGraphic({ motif, accent }: { motif: Motif; accent: string }) {
   return (
     <svg
@@ -189,6 +201,7 @@ function MotifGraphic({ motif, accent }: { motif: Motif; accent: string }) {
 
 export function ToolsElegantCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [progressIndex, setProgressIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [progress, setProgress] = useState(0);
@@ -205,6 +218,7 @@ export function ToolsElegantCarousel() {
 
   const isPaused = reducedMotion || hoverPaused || focusPaused || hidden;
   const currentSlide = slides[currentIndex] ?? slides[0];
+  const progressSlide = slides[progressIndex] ?? slides[0];
   const phaseClass = isTransitioning ? "is-leaving" : "is-visible";
 
   const clearTimers = useCallback(() => {
@@ -216,9 +230,10 @@ export function ToolsElegantCarousel() {
 
   const goToSlide = useCallback(
     (index: number, dir?: "next" | "prev") => {
-      if (index === currentIndex) return;
+      if (index === progressIndex) return;
       clearTimers();
-      setDirection(dir ?? (index > currentIndex ? "next" : "prev"));
+      setDirection(dir ?? (index > progressIndex ? "next" : "prev"));
+      setProgressIndex(index);
       setProgress(0);
 
       if (reducedMotion) {
@@ -235,16 +250,16 @@ export function ToolsElegantCarousel() {
         }, 50);
       }, TRANSITION_DURATION / 2);
     },
-    [clearTimers, currentIndex, reducedMotion],
+    [clearTimers, progressIndex, reducedMotion],
   );
 
   const goNext = useCallback(() => {
-    goToSlide((currentIndex + 1) % slides.length, "next");
-  }, [currentIndex, goToSlide]);
+    goToSlide((progressIndex + 1) % slides.length, "next");
+  }, [goToSlide, progressIndex]);
 
   const goPrev = useCallback(() => {
-    goToSlide((currentIndex - 1 + slides.length) % slides.length, "prev");
-  }, [currentIndex, goToSlide]);
+    goToSlide((progressIndex - 1 + slides.length) % slides.length, "prev");
+  }, [goToSlide, progressIndex]);
 
   useEffect(() => {
     const onVisibility = () => setHidden(document.hidden);
@@ -273,7 +288,7 @@ export function ToolsElegantCarousel() {
       if (intervalRef.current) clearInterval(intervalRef.current);
       if (progressRef.current) clearInterval(progressRef.current);
     };
-  }, [currentIndex, goNext, isPaused]);
+  }, [goNext, isPaused, progressIndex]);
 
   const handleTouchStart = (event: TouchEvent) => {
     touchStartX.current = event.targetTouches[0]?.clientX ?? 0;
@@ -423,23 +438,23 @@ export function ToolsElegantCarousel() {
             <button
               key={slide.title}
               type="button"
-              aria-current={index === currentIndex ? "true" : undefined}
+              aria-current={index === progressIndex ? "true" : undefined}
               aria-label={`Перейти к сценарию ${index + 1}: ${slide.title}`}
-              className={`tools-carousel-progress-item${index === currentIndex ? " is-active" : ""}`}
+              className={`tools-carousel-progress-item${index === progressIndex ? " is-active" : ""}`}
               onClick={() => goToSlide(index)}
             >
               <span className="tools-carousel-progress-track">
                 <span
                   className="tools-carousel-progress-fill"
                   style={{
-                    width:
-                      index === currentIndex
-                        ? `${progress}%`
-                        : index < currentIndex
-                          ? "100%"
-                          : "0%",
+                    width: progressFillWidth(
+                      index,
+                      progressIndex,
+                      progress,
+                      isPaused,
+                    ),
                     backgroundColor:
-                      index === currentIndex ? currentSlide.accent : undefined,
+                      index === progressIndex ? progressSlide.accent : undefined,
                   }}
                 />
               </span>

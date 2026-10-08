@@ -1,6 +1,6 @@
-import { ContactsSection } from "@/components/landing/contacts-section";
 import { FinalCtaSection } from "@/components/landing/final-cta-section";
 import { HeroSection } from "@/components/landing/hero-section";
+import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteHeader } from "@/components/landing/site-header";
 import { SpatialContextSection } from "@/components/landing/spatial-context-section";
 import { StarField } from "@/components/landing/star-field";
@@ -28,8 +28,8 @@ export default function Home() {
         <SpatialContextSection />
         <ToolsElegantCarousel />
         <FinalCtaSection demo={demo} />
-        <ContactsSection />
       </main>
+      <SiteFooter />
     </div>
   );
 }

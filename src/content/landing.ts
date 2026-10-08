@@ -100,21 +100,55 @@ export const landing = {
     items: [
       {
         label: "Организация",
-        value: "ООО «Наименование организации»",
+        lines: [
+          {
+            value:
+              "Акционерное общество «Научно-исследовательский институт точных приборов» (АО «НИИ ТП»)",
+          },
+        ],
       },
       {
         label: "Адрес",
-        value: "000000, г. Москва, ул. Примерная, д. 0",
+        lines: [
+          {
+            value: "127490, Москва, ул. Декабристов, владение 51",
+          },
+        ],
       },
       {
         label: "Телефон",
-        value: "+7 (000) 000-00-00",
-        href: "tel:+70000000000",
+        lines: [
+          {
+            value: "+7 (495) 231-38-22",
+            href: "tel:+74952313822",
+            note: "справочная",
+          },
+          {
+            value: "+7 (495) 737-69-58",
+            href: "tel:+74957376958",
+            note: "приёмная",
+          },
+          {
+            value: "+7-927-538-22-44",
+            href: "tel:+79275382244",
+            note: "разработчики",
+          },
+        ],
       },
       {
         label: "Электронная почта",
-        value: "info@example.com",
-        href: "mailto:info@example.com",
+        lines: [
+          {
+            value: "info@niitp.ru",
+            href: "mailto:info@niitp.ru",
+            note: "приёмная",
+          },
+          {
+            value: "porphirik@mail.ru",
+            href: "mailto:porphirik@mail.ru",
+            note: "разработчики",
+          },
+        ],
       },
     ],
   },

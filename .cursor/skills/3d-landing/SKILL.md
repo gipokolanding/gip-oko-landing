@@ -23,7 +23,9 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
    starfield work also compare
    `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`. For
    GLB canvas work also compare
-   `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`.
+   `.cursor/superpowers/specs/2026-10-06-hero-globe-runtime-design.md`. For
+   footer globe work also compare
+   `.cursor/superpowers/specs/2026-10-07-footer-globe-design.md`.
    Fix blockers before reporting completion.
 
 ## Domain traps
@@ -71,3 +73,12 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   the old five-cell text grid. Copy, motion, and 760 px progress hiding are
   owned by
   `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`.
+- Contacts live in `<footer id="contacts">` after `main`, not a section
+  inside `main`. Two columns (heading/lede left, requisites right), then a
+  cropped SVG wireframe globe (`FooterGlobe`), not the old 2×2 cell grid
+  and not a second WebGL canvas. Local TopoJSON only. Sphere disk filled
+  with Abyss so stars do not show through. Crop window height is 13/60 of
+  column width (peek fraction from 1024px). Auto-rotate 0.1125° per frame;
+  no mouse interaction; reduced motion is a static frame. Owned
+  by
+  `.cursor/superpowers/specs/2026-10-07-footer-globe-design.md`.

@@ -1,6 +1,6 @@
 # ГИП «Око» Landing Product Specification
 
-**Status:** implemented 2026-10-05
+**Status:** implemented 2026-10-05; contacts footer 2026-10-08
 
 ## Document purpose
 
@@ -61,13 +61,14 @@ than an instrumented conversion metric.
 ## 2. Page sections
 
 The page is a single linear narrative with four product sections, followed
-by institutional contacts:
+by institutional contacts in the page footer:
 
 1. Hero — territory as one spatial whole.
 2. Unified spatial context — heterogeneous data in one project.
 3. Analysis tools — capabilities grouped by user task.
 4. Final transition — a direct handoff to the working demo.
-5. Contacts — organization requisites after the product narrative.
+5. Contacts — organization requisites in the page footer after the product
+   narrative.
 
 A site header supports these sections but does not introduce additional
 marketing narratives.
@@ -226,10 +227,12 @@ replaced with a contact form, modal, download, or callback request.
 
 ### Section 5 — Contacts
 
-Anchor: `contacts`
+Anchor: `contacts` on the page `footer` (outside `main`)
 
-Purpose: give a typical institutional contact block after the product
-narrative. This section must not compete with the demo CTA or collect leads.
+Purpose: give a typical institutional contact footer after the product
+narrative. This footer must not compete with the demo CTA or collect leads.
+Layout, the cropped SVG globe, and local TopoJSON are owned by
+`.cursor/superpowers/specs/2026-10-07-footer-globe-design.md`.
 
 Required heading:
 
@@ -239,17 +242,23 @@ Required introductory copy:
 
 `Реквизиты для связи по вопросам применения платформы.`
 
-Required fields, using development placeholders until the product owner
-supplies real requisites:
+Required fields (product-owner requisites):
 
-- `Организация` — `ООО «Наименование организации»`
-- `Адрес` — `000000, г. Москва, ул. Примерная, д. 0`
-- `Телефон` — `+7 (000) 000-00-00`
-- `Электронная почта` — `info@example.com`
+- `Организация` — `Акционерное общество «Научно-исследовательский институт точных приборов» (АО «НИИ ТП»)`
+- `Адрес` — `127490, Москва, ул. Декабристов, владение 51`
+- `Телефон` —
+  - `+7 (495) 231-38-22` (`справочная`) as `tel:+74952313822`
+  - `+7 (495) 737-69-58` (`приёмная`) as `tel:+74957376958`
+  - `+7-927-538-22-44` (`разработчики`) as `tel:+79275382244`
+- `Электронная почта` —
+  - `info@niitp.ru` (`приёмная`) as `mailto:info@niitp.ru`
+  - `porphirik@mail.ru` (`разработчики`) as `mailto:porphirik@mail.ru`
 
-Phone and email may be ordinary `tel:` and `mailto:` links. Do not invent a
-real organization, address, or published legal identity. Do not add a contact
-form, map, or callback request.
+Phone numbers and email addresses are ordinary `tel:` and `mailto:` links.
+Parenthetical labels are not links and have no hover treatment. Do not add a
+contact form, map product control, or callback request. A cropped local SVG
+wireframe globe under the requisites is required; it is decorative, not a map
+of the product. Do not fetch world data from a CDN.
 
 ### Page metadata
 
@@ -483,7 +492,8 @@ src/
       spatial-context-section.tsx
       tools-elegant-carousel.tsx
       final-cta-section.tsx
-      contacts-section.tsx
+      site-footer.tsx
+      footer-globe.tsx
       demo-link.tsx
       section-heading.tsx
   content/
@@ -496,7 +506,7 @@ Responsibilities:
 
 - `app/page.tsx`
   - Server Component.
-  - Composes sections in the fixed order.
+  - Composes sections in the fixed order, then `SiteFooter` after `main`.
   - Supplies validated demo configuration.
 - `app/layout.tsx`
   - Owns Russian document language, metadata, local font configuration,
@@ -537,18 +547,22 @@ Responsibilities:
   - Renders the five task groups as a vertical carousel in `#tools`.
 - `FinalCtaSection`
   - Repeats the shared direct demo action.
-- `ContactsSection`
-  - Renders the institutional contact requisites after the final CTA.
-  - Uses placeholder values until real requisites exist.
+- `SiteFooter`
+  - Page `footer` after `main`, id `contacts`.
+  - Renders heading, lede, and institutional requisites.
+- `FooterGlobe`
+  - Client Component.
+  - Draws the cropped local SVG wireframe globe. Must not use Three.js or
+    share state with the GLB canvas or starfield.
 - `DemoLink`
   - The only primary CTA presentation component.
   - Receives validated state and keeps copy and behavior consistent.
 - `SectionHeading`
   - Shared semantic heading primitive without automatic eyebrow text.
 
-There is no global client state. Section content is static. The GLB canvas
-and the starfield are separate client islands and must not share refs,
-frame loops, or visibility observers.
+There is no global client state. Section content is static. The GLB canvas,
+the starfield, and the footer SVG globe are separate client islands and
+must not share refs, frame loops, or visibility observers.
 
 ## 7. Accessibility requirements
 
@@ -556,7 +570,7 @@ The target is WCAG 2.2 AA for the landing page.
 
 ### Semantics and reading order
 
-- Use `header`, `nav`, `main`, and `section` landmarks.
+- Use `header`, `nav`, `main`, `footer`, and `section` landmarks.
 - Include a visible-on-focus skip link to `main`.
 - Use exactly one H1.
 - Preserve sequential heading levels.
@@ -775,4 +789,3 @@ Until the product owner provides evidence and approves wording, do not claim:
   output.
 - The final implementation is compared with `.cursor/docs/brief.md`, this
   specification, `AGENTS.md`, and the Blender parity specification.
-
