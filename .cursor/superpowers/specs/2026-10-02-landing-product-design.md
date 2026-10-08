@@ -1,6 +1,6 @@
 # ГИП «Око» Landing Product Specification
 
-**Status:** implemented 2026-10-05; contacts footer 2026-10-08
+**Status:** implemented 2026-10-05; contacts footer 2026-10-08; stacked hero GLB overlay 2026-10-08; header compact CTA and pending `#contacts` 2026-10-08
 
 ## Document purpose
 
@@ -33,8 +33,10 @@ the brief wins.
   Keep the local GLB and the Blender-parity color-management contract.
   Do not add a parallel route.
 - This implementation cycle does not set `NEXT_PUBLIC_DEMO_URL`. Development
-  uses the disabled CTA defined below. A production release remains blocked
-  until a valid URL exists. Do not invent a substitute destination.
+  uses the pending CTA defined below: every primary action goes to
+  `#contacts` rather than a demo substitute. A production release remains
+  blocked until a valid URL exists. Do not invent a `/demo` route or a
+  lead form.
 - Out of scope: changing the product itself, building the demo, lead capture,
   analytics, authentication, a CMS, a database, or remote decorative assets.
 
@@ -94,10 +96,19 @@ Required visible content:
 - Primary action: `Запустить демонстрацию`
 
 The header must not contain status theater such as “online,” “active,”
-“runtime,” or artificial system telemetry. The navigation must remain
-available at 390 px rather than disappearing. The header stays in the
-viewport while the page scrolls, so brand, anchors, and the demo action
-remain reachable without returning to the top.
+“runtime,” or artificial system telemetry. Brand and the three anchors
+sit together on the start edge; the demo action sits on the end. The
+navigation must remain on that first row at 390 px rather than moving
+under the brand or disappearing. The header stays in the viewport while
+the page scrolls, so brand, anchors, and the demo action remain
+reachable without returning to the top. The header is always one row.
+When the labelled demo action no longer fits beside brand and nav,
+replace it with Font Awesome 5 Regular `eye` (the product «Око»,
+not a media play mark)
+plus a tooltip. The control is `36px` so it fits the locked `760px`
+header height. If even that icon does not fit, tighten header type and
+gaps without changing header height. Do not wrap the header to a second
+row.
 
 ### Section 1 — Hero
 
@@ -156,9 +167,10 @@ text cell grid and not as stock-photo SaaS cards. Desktop keeps heading,
 intro, and closing copy on the left and a 2×2 card grid on the right. Below
 1080 px the cards move under the copy: four in one row, then 2×2, then one
 column. Each card uses a local schematic SVG motif (raster, vector, relief,
-volume) with a hairline instrument frame. Title and body stay visible; hover
-and keyboard focus enlarge the active card and de-emphasize the others.
-`prefers-reduced-motion` removes blur and scale. No remote images.
+volume) in a nested hairline instrument frame (outer tray + inner plate).
+Title and body stay visible; hover and keyboard focus enlarge the active
+card and de-emphasize the others with scale and opacity, not blur.
+`prefers-reduced-motion` removes scale. No remote images.
 
 ### Section 3 — Analysis tools
 
@@ -223,7 +235,9 @@ Required primary action:
 `Запустить демонстрацию`
 
 The action opens the configured demo in the current tab. It must not be
-replaced with a contact form, modal, download, or callback request.
+replaced with a contact form, modal, download, or callback request. Wrap
+the heading, body, and CTA in one hairline instrument frame. Do not inflate
+the padding into a large empty panel.
 
 ### Section 5 — Contacts
 
@@ -246,10 +260,11 @@ Required fields (product-owner requisites):
 
 - `Организация` — `Акционерное общество «Научно-исследовательский институт точных приборов» (АО «НИИ ТП»)`
 - `Адрес` — `127490, Москва, ул. Декабристов, владение 51`
+  (keep `51` on the same line as `владение`)
 - `Телефон` —
   - `+7 (495) 231-38-22` (`справочная`) as `tel:+74952313822`
   - `+7 (495) 737-69-58` (`приёмная`) as `tel:+74957376958`
-  - `+7-927-538-22-44` (`разработчики`) as `tel:+79275382244`
+  - `+7 (927) 538-22-44` (`разработчики`) as `tel:+79275382244`
 - `Электронная почта` —
   - `info@niitp.ru` (`приёмная`) as `mailto:info@niitp.ru`
   - `porphirik@mail.ru` (`разработчики`) as `mailto:porphirik@mail.ru`
@@ -280,8 +295,10 @@ or unsupported deployment properties.
 
 - The primary experience is a linear top-to-bottom scroll.
 - The site header remains visible at the top of the viewport during scroll.
-- In-page anchors account for the sticky header height and do not hide
-  headings under it.
+- The header hairline sits on the content column (`.site-header-inner`),
+  not edge-to-edge across the viewport.
+- In-page anchors use `html { scroll-padding-top: 5.5rem }` at every
+  width. The header stays one row, so a taller offset is not required.
 - Header links are optional accelerators, not a requirement for understanding
   the page.
 - Anchor targets use stable IDs and account for keyboard focus.
@@ -292,28 +309,47 @@ or unsupported deployment properties.
 
 ### Primary CTA
 
-- Every primary CTA uses the exact text `Запустить демонстрацию`.
-- All primary CTAs use the same destination and behavior.
-- The destination comes from one configuration source,
-  `NEXT_PUBLIC_DEMO_URL`.
-- A valid configured URL opens directly in the current tab.
+- Hero and final CTAs use the exact visible text `Запустить демонстрацию`.
+- The header uses the same label while it fits. When it does not, the
+  visible control is an eye icon; the accessible name remains
+  `Запустить демонстрацию`, with the pending suffix below when the demo
+  URL is absent.
+- A valid `NEXT_PUBLIC_DEMO_URL` opens the demo in the current tab from
+  every primary CTA, including the header.
 - A production release is blocked when the URL is absent or invalid.
-- Development must never use `#`, `javascript:`, a fabricated `/demo` route,
+- Development must never use `javascript:`, a fabricated `/demo` route,
   or a lead form as a substitute.
-- Until the product owner supplies a real demo URL, every primary CTA uses
-  the development unavailable state below.
+- Until the product owner supplies a real demo URL:
+  - Every pending CTA is an enabled link to `#contacts` (the same
+    destination as nav `Контакты`). Hero and final keep the full label;
+    they do not shrink to the eye icon. Compact eye and type
+    tightening apply only in the header.
+  - All pending CTAs share Instrument fill, `650` weight, Frost mixed
+    toward Muted Steel, and a Signal Cyan hairline
+    (`rgb(88 232 244 / 0.5)`). On `:hover` / `:focus-visible` they darken
+    toward Abyss and Muted Steel. Full-size tooltip: `...скоро`.
+    Header compact tooltip: `Запустить демонстрацию (...скоро)`.
+  - At `max-width: 760px` the header brand, nav, and labelled CTA use
+    `0.9375rem`, and labelled header CTA / nav hit areas are `36px`
+    tall. The header inner is locked at `44px` from this breakpoint
+    down — further type tightening and the compact eye must not
+    change that height. The compact eye control is `36×36px`; the
+    Font Awesome Regular `eye` is about `23px` wide inside it.
 
 When the URL is absent in development:
 
-- Render a non-link disabled action.
-- Apply `aria-disabled="true"`.
-- Do not add adjacent explanation copy.
+- Do not render a disabled non-link. Pending CTAs go to `#contacts`.
+- Keep the shared pending chrome above, not a filled cyan pill. Do not
+  use the Frost divider color for the border.
+- Do not add adjacent explanation copy. Status lives in the tooltip.
 
 ### Progressive enhancement
 
 - The server-rendered document contains all meaningful headings, body copy,
   lists, and CTA context.
-- JavaScript enhances only the hero canvas.
+- JavaScript enhances the hero canvas and the header compact/tight
+  measure. Without that measure, CSS falls back to the compact icon at
+  `max-width: 680px` and tighter header type at `410px`.
 - Without JavaScript, the page still explains the complete product narrative.
 - Without WebGL, the hero uses the normal CSS background and retains all text
   and actions. No blocking error is shown because the model is decorative.
@@ -323,12 +359,14 @@ When the URL is absent in development:
 - The supported minimum viewport width is 390 CSS pixels.
 - Content must not require horizontal page scrolling.
 - Hero copy precedes the visual in DOM and reading order.
-- Navigation wraps or moves to a second row on narrow screens; it is not
-  removed.
+- Brand, navigation, and the demo action stay on one header row. When
+  the labelled action no longer fits, it becomes the eye icon; it is
+  not removed and does not wrap. Navigation is not removed.
 - Data cards wrap from a two-column section (2×2 on the right) to stacked
   copy-then-cards, then four-across, 2×2, and one column. Tool groups stay
   in the `#tools` carousel.
-- No essential copy appears only on hover.
+- No essential copy appears only on hover. The pending CTA tooltip
+  is status, not the only name of the action.
 
 ## 5. Visual direction
 
@@ -373,18 +411,32 @@ Rules:
   color.
 - Body copy should generally remain within 68–72 characters per line.
 - Headings use scale, weight, and line breaks rather than ornamental styling.
+- Headings use `text-wrap: balance` and `overflow-wrap: break-word`. Body
+  copy uses `text-wrap: pretty`. Do not use `overflow-wrap: anywhere`.
+  The hero H1 is the exception: `overflow-wrap: normal` so
+  `пространственном` never splits off a single letter.
+- After a section H2, the lede has `0.7rem` top margin. A closing `.copy`
+  after a lede has `0.85rem` top margin. Do not add extra section padding
+  to create that gap.
 
 Suggested type scale (clamp maxima match 1024 px):
 
-- Hero H1: `clamp(3.25rem, 7vw, 4.48rem)`, line-height `0.92–0.98`.
+- Hero H1: `clamp(2.25rem, min(7vw, 10.5cqi), 4.48rem)`, line-height
+  `0.92–0.98`. `.hero-copy` is an inline-size container so `cqi` tracks
+  the copy column. Desktop hero columns are equal `1fr 1fr`. The H1 must
+  keep `пространственном` intact and wrap at word boundaries, typically
+  three lines while the hero is two columns.
 - Section H2: `clamp(2.25rem, 4.5vw, 2.88rem)`, line-height `0.98–1.05`.
 - H3: `clamp(1.25rem, 2vw, 1.28rem)`.
 - Body: `1rem–1.125rem`, line-height `1.55–1.7`.
-- Supporting text: no smaller than `0.875rem`.
+- Supporting text: card bodies and carousel index `0.8125rem`; progress
+  labels `0.75rem`. Do not go below `0.75rem`.
 - At 390 px the root `html` font-size is `93.75%`, so every rem-based size
   on the page scales down slightly.
-- At 410 px and below, the header brand and demo action use `0.9375rem` and
-  stay on one line.
+- When even the `36px` header icon cannot sit on the row, tighten brand
+  to `0.9375rem`, nav to `0.875rem`, and header gaps. CSS applies that
+  at `410px` before JS measures. Do not wrap the header or change its
+  `44px` height.
 
 ### Layout
 
@@ -402,7 +454,7 @@ Desktop composition:
 
 ```text
 ┌──────────────────────────────────────────────────────────────┐
-│ Brand          Data · Tools                        Demo CTA │
+│ Brand Data · Tools · Contacts                      Demo CTA │
 ├────────────────────────── Hero ──────────────────────────────┤
 │ Product definition      │                       [GLB field] │
 │ Problem → result        │                    atmospheric 3D │
@@ -435,7 +487,8 @@ Additional rules:
 - On desktop it occupies the right/background visual field and may extend
   into unoccupied hero space.
 - It must not reduce text contrast or intercept CTA input.
-- On mobile it moves behind or below the copy without changing reading order.
+- On mobile it sits behind the copy and in front of the starfield, without
+  changing reading order. It does not move into a row below the text.
 - Touch input remains available for vertical page scrolling.
 - Pointer does not tilt or rotate the globe. Starfield parallax stays owned by
   `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
@@ -485,6 +538,7 @@ src/
   components/
     landing/
       site-header.tsx
+      header-bar.tsx
       hero-section.tsx
       hero-model.tsx
       background-model-canvas.tsx
@@ -519,7 +573,9 @@ Responsibilities:
   - Distinguishes development unavailable state from production release
     failure.
 - `SiteHeader`
-  - Brand, three anchor links, and the shared demo action.
+  - Server Component shell for the sticky header.
+  - Brand and three anchor links grouped on the start edge; the header
+    demo action sits on the end via `HeaderBar`.
   - Stays in the viewport while the page scrolls.
 - `HeroSection`
   - Server-rendered heading, definition, result statement, CTA, and visual
@@ -554,9 +610,17 @@ Responsibilities:
   - Client Component.
   - Draws the cropped local SVG wireframe globe. Must not use Three.js or
     share state with the GLB canvas or starfield.
+- `HeaderBar`
+  - Client Component.
+  - Measures remaining header row space and switches the header CTA
+    between the labelled control and the eye icon. Tightens header
+    type when the icon still does not fit.
 - `DemoLink`
-  - The only primary CTA presentation component.
+  - Hero and final primary CTA presentation component.
   - Receives validated state and keeps copy and behavior consistent.
+    Pending state uses the shared chrome, `...скоро` tooltip, and
+    `#contacts`. It does not compact to an icon. The header does not use
+    this component.
 - `SectionHeading`
   - Shared semantic heading primitive without automatic eyebrow text.
 
@@ -616,6 +680,11 @@ The target is WCAG 2.2 AA for the landing page.
 - A static model or CSS fallback is acceptable.
 - Do not use flashing, rapid pulsing, or parallax that moves independently of
   user input.
+- Interactive color and transform transitions, and the tools-carousel
+  kenburns, use `cubic-bezier(0.32, 0.72, 0, 1)`. Do not use `linear` or
+  `ease-in-out` for those. Animate `transform`, `opacity`, and explicit
+  color properties only — not `background` or `filter` on scrolling
+  surfaces. The enabled demo CTA scales to `0.98` on `:active`.
 
 ## 8. Performance requirements
 
@@ -639,8 +708,8 @@ no long task causes a visibly delayed response.
 ### Rendering and JavaScript
 
 - `app/page.tsx` and all static sections remain Server Components.
-- Only the hero model wrapper, the GLB canvas, `StarField`, and
-  `ToolsElegantCarousel` ship client behavior.
+- Only the hero model wrapper, the GLB canvas, `StarField`,
+  `ToolsElegantCarousel`, and `HeaderBar` ship client behavior.
 - Dynamically import the GLB canvas with SSR disabled.
 - Do not load Three.js, React Three Fiber, Drei, or the GLB before the primary
   HTML is usable. `StarField` uses Canvas 2D only.
@@ -739,9 +808,12 @@ Until the product owner provides evidence and approves wording, do not claim:
 - All required Russian UI copy is present and proofread.
 - The old AI Core, agentic runtime, and English slogan content is absent.
 - Header navigation reaches the correct section anchors.
-- Every primary CTA reads `Запустить демонстрацию`.
+- Hero and final CTAs read `Запустить демонстрацию`. The header uses that
+  label, or an eye icon whose accessible name is that label.
 - A valid real demo URL is configured for production.
-- The CTA opens the demo directly in the current tab without a form or modal.
+- With a valid URL, every primary CTA opens the demo in the current tab
+  without a form or modal. Without a URL, every pending CTA goes to
+  `#contacts`.
 - No unsupported claims or invented business details appear.
 
 ### Visual implementation
@@ -753,14 +825,17 @@ Until the product owner provides evidence and approves wording, do not claim:
 - The GLB is used only in the hero.
 - The model remains subordinate to the hero copy and CTA.
 - Desktop and 390 px layouts match the specified narrative and reading order.
-- No text is clipped, overlapped, or available only through hover.
+- No text is clipped, overlapped, or available only through hover, except
+  the pending CTA tooltip (`...скоро` / header compact suffix) and the
+  compact header label, which also lives in `aria-label`.
 
 ### Accessibility
 
 - Keyboard-only navigation reaches and activates every control.
 - The page remains usable without a mouse.
-- The 390 px header navigation is present, operable, and remains visible
-  while the page scrolls.
+- The 390 px header navigation is present, operable, on the same row
+  as the brand and the compact eye CTA, and remains visible while the
+  page scrolls.
 - Focus indicators are visible and not obscured.
 - Reduced-motion mode removes nonessential motion.
 - Automated accessibility inspection reports no critical or serious issues.

@@ -15,7 +15,7 @@ export function HeroSection({ demo }: HeroSectionProps) {
         <p className="hero-definition">{landing.hero.definition}</p>
         <p className="hero-result">{landing.hero.result}</p>
         <div className="hero-actions">
-          <DemoLink demo={demo} />
+          <DemoLink demo={demo} tipId="hero-cta-soon" />
         </div>
       </div>
       <div className="hero-visual" aria-hidden="true">

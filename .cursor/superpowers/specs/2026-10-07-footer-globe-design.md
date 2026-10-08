@@ -233,8 +233,8 @@ Verify in a browser, not only from a screenshot:
   through the disk, bottom fade into Abyss. Host height / host width is
   13/60 at 1024px, 1280px content, and 390px (same peek fraction).
 - 390 px: stacked heading → requisites → globe band, no horizontal
-  overflow, header `Контакты` still present, heading not hidden under the
-  sticky header.
+  overflow, header `Контакты` still present. Anchor offset is the landing
+  product spec `scroll-padding-top` (`5.5rem`; the header stays one row).
 - Keyboard: phone and email links reachable; globe not focused.
 - No-mouse: page readable; globe may rotate on its own.
 - `prefers-reduced-motion: reduce`: static globe, no rAF rotate.

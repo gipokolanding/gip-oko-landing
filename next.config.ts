@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },
+  devIndicators: {
+    position: "bottom-right",
+  },
 };
 
 export default nextConfig;

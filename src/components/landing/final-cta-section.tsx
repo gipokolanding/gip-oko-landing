@@ -10,9 +10,11 @@ type FinalCtaSectionProps = {
 export function FinalCtaSection({ demo }: FinalCtaSectionProps) {
   return (
     <section className="section wrap final-cta" aria-labelledby="final-cta-title">
-      <SectionHeading id="final-cta-title">{landing.finalCta.title}</SectionHeading>
-      <p className="lede">{landing.finalCta.body}</p>
-      <DemoLink demo={demo} />
+      <div className="final-cta-frame">
+        <SectionHeading id="final-cta-title">{landing.finalCta.title}</SectionHeading>
+        <p className="lede">{landing.finalCta.body}</p>
+        <DemoLink demo={demo} tipId="final-cta-soon" />
+      </div>
     </section>
   );
 }

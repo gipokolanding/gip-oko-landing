@@ -49,7 +49,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className={golosText.variable}>
-      <body className={golosText.className}>{children}</body>
+      <body className={golosText.className}>
+        {children}
+        {process.env.NODE_ENV === "development" ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function () {
+  function place() {
+    var portal = document.querySelector("nextjs-portal");
+    var root = portal && portal.shadowRoot;
+    if (!root || root.getElementById("gip-oko-overlay-pos")) return;
+    var style = document.createElement("style");
+    style.id = "gip-oko-overlay-pos";
+    style.textContent =
+      ".nextjs-toast{top:auto!important;bottom:20px!important;right:20px!important;left:auto!important;}";
+    root.appendChild(style);
+  }
+  new MutationObserver(place).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+  place();
+})();`,
+            }}
+          />
+        ) : null}
+      </body>
     </html>
   );
 }

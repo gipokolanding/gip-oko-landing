@@ -63,10 +63,13 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   2D. Do not add star particles to the GLB canvas or a second WebGL context.
   Star density and pointer rules are owned by
   `.cursor/superpowers/specs/2026-10-06-starfield-background-design.md`.
+- On stacked widths the hero GLB stays behind the copy and in front of
+  the starfield. Do not move it into a row below the text.
 - Data (`#data`) is heading and copy on the left with four hover-reveal
   cards on the right (local SVG motifs: raster, vector, relief, volume),
   not the old text cell grid. Narrow widths stack cards under the copy
-  (four-across, then 2×2, then one column). Reduced motion drops blur and
+  (four-across, then 2×2, then one column). Nested hairline instrument
+  frame; hover uses scale and opacity, not blur. Reduced motion drops
   scale. Owned by
   `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`.
 - Tools (`#tools`) is a vertical carousel (16:9 visual, copy below), not
@@ -82,3 +85,7 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   no mouse interaction; reduced motion is a static frame. Owned
   by
   `.cursor/superpowers/specs/2026-10-07-footer-globe-design.md`.
+- Header is always one row. When the labelled demo action no longer fits,
+  it becomes Font Awesome 5 Regular `eye` (~23px in a `36×36` control),
+  not a play mark or a globe. Pending CTAs go to `#contacts`. Owned by
+  `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`.

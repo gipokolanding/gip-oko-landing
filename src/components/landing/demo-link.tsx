@@ -4,9 +4,10 @@ import { landing } from "@/content/landing";
 type DemoLinkProps = {
   demo: DemoConfig;
   className?: string;
+  tipId: string;
 };
 
-export function DemoLink({ demo, className }: DemoLinkProps) {
+export function DemoLink({ demo, className, tipId }: DemoLinkProps) {
   const label = landing.cta.label;
 
   if (demo.status === "ready") {
@@ -18,8 +19,15 @@ export function DemoLink({ demo, className }: DemoLinkProps) {
   }
 
   return (
-    <span className={className ?? "demo-link is-disabled"} aria-disabled="true">
+    <a
+      className={className ?? "demo-link is-pending"}
+      href={`#${landing.contacts.id}`}
+      aria-describedby={tipId}
+    >
       {label}
-    </span>
+      <span id={tipId} className="demo-link-tip" role="tooltip">
+        {landing.cta.soon}
+      </span>
+    </a>
   );
 }

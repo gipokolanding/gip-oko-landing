@@ -23,108 +23,134 @@ function CardMotif({ motif, accent }: { motif: Motif; accent: string }) {
     >
       {motif === "raster" ? (
         <>
-          {Array.from({ length: 8 }, (_, i) => (
+          {Array.from({ length: 14 }, (_, i) => (
             <line
               key={`rv${i}`}
-              x1={10 + i * 18}
-              y1="6"
-              x2={10 + i * 18}
-              y2="94"
+              x1={6 + i * 11}
+              y1="4"
+              x2={6 + i * 11}
+              y2="96"
               stroke="currentColor"
-              strokeOpacity="0.16"
-              strokeWidth="0.4"
+              strokeOpacity="0.14"
+              strokeWidth="0.35"
             />
           ))}
-          {Array.from({ length: 5 }, (_, i) => (
+          {Array.from({ length: 9 }, (_, i) => (
             <line
               key={`rh${i}`}
-              x1="8"
-              y1={12 + i * 18}
-              x2="152"
-              y2={12 + i * 18}
+              x1="4"
+              y1={8 + i * 10}
+              x2="156"
+              y2={8 + i * 10}
               stroke="currentColor"
-              strokeOpacity="0.16"
-              strokeWidth="0.4"
+              strokeOpacity="0.14"
+              strokeWidth="0.35"
             />
           ))}
           <rect
-            x="22"
-            y="18"
-            width="72"
-            height="52"
+            x="18"
+            y="16"
+            width="78"
+            height="54"
             fill={accent}
-            fillOpacity="0.14"
+            fillOpacity="0.12"
             stroke={accent}
             strokeWidth="1.1"
           />
+          <rect x="24" y="22" width="10" height="8" fill={accent} fillOpacity="0.42" />
+          <rect x="36" y="22" width="10" height="8" fill={accent} fillOpacity="0.22" />
+          <rect x="48" y="32" width="10" height="8" fill={accent} fillOpacity="0.34" />
+          <rect x="60" y="42" width="10" height="8" fill={accent} fillOpacity="0.2" />
+          <rect x="36" y="42" width="10" height="8" fill={accent} fillOpacity="0.5" />
           <rect
-            x="58"
-            y="32"
-            width="72"
-            height="48"
+            x="64"
+            y="30"
+            width="78"
+            height="50"
             fill={accent}
-            fillOpacity="0.08"
+            fillOpacity="0.06"
             stroke="currentColor"
-            strokeOpacity="0.45"
+            strokeOpacity="0.5"
             strokeWidth="1"
           />
-          <rect x="34" y="28" width="14" height="10" fill={accent} fillOpacity="0.35" />
-          <rect x="70" y="46" width="18" height="12" fill={accent} fillOpacity="0.28" />
+          <rect x="88" y="44" width="14" height="10" fill={accent} fillOpacity="0.28" />
+          <rect x="104" y="54" width="14" height="10" fill={accent} fillOpacity="0.18" />
+          <line
+            x1="18"
+            y1="48"
+            x2="96"
+            y2="48"
+            stroke={accent}
+            strokeWidth="0.7"
+            strokeOpacity="0.7"
+          />
         </>
       ) : null}
       {motif === "vector" ? (
         <>
           <path
-            d="M18 70 L36 28 L62 38 L84 18 L118 34 L148 24"
+            d="M14 76 L30 42 L52 50 L74 22 L102 38 L128 28 L150 44"
             fill="none"
             stroke="currentColor"
-            strokeOpacity="0.4"
-            strokeWidth="0.9"
+            strokeOpacity="0.35"
+            strokeWidth="0.85"
+            strokeDasharray="2.4 1.8"
           />
           <path
-            d="M24 78 L48 44 L78 52 L70 82 Z"
+            d="M22 82 L44 48 L72 56 L64 86 Z"
             fill={accent}
-            fillOpacity="0.16"
+            fillOpacity="0.18"
             stroke={accent}
-            strokeWidth="1.1"
+            strokeWidth="1.15"
           />
           <path
-            d="M86 70 L112 48 L142 62 L128 86 L96 84 Z"
+            d="M84 72 L114 46 L146 60 L132 86 L96 84 Z"
             fill="none"
             stroke="currentColor"
-            strokeOpacity="0.7"
+            strokeOpacity="0.75"
             strokeWidth="1.1"
           />
-          <circle cx="36" cy="28" r="2.6" fill={accent} />
-          <circle cx="84" cy="18" r="2.6" fill={accent} />
-          <circle cx="118" cy="34" r="2.6" fill="currentColor" fillOpacity="0.7" />
+          <circle cx="30" cy="42" r="2.4" fill={accent} />
+          <circle cx="74" cy="22" r="2.4" fill={accent} />
+          <circle cx="102" cy="38" r="2.2" fill="currentColor" fillOpacity="0.7" />
+          <circle cx="128" cy="28" r="2.2" fill="currentColor" fillOpacity="0.55" />
+          <circle cx="44" cy="48" r="1.8" fill={accent} />
+          <circle cx="114" cy="46" r="1.8" fill="currentColor" fillOpacity="0.7" />
         </>
       ) : null}
       {motif === "relief" ? (
         <>
-          <path d="M8 78 Q40 70 80 78 T152 74 L152 94 L8 94 Z" fill={accent} fillOpacity="0.1" />
+          <path d="M6 82 Q40 74 80 82 T154 78 L154 96 L6 96 Z" fill={accent} fillOpacity="0.16" />
+          <path d="M8 70 Q42 60 82 68 T152 62 L152 82 Q80 86 8 82 Z" fill={accent} fillOpacity="0.08" />
           <path
-            d="M14 70 C38 58 58 66 80 60 C104 54 126 62 146 52"
+            d="M12 78 C38 70 58 76 80 72 C108 66 128 72 148 66"
             fill="none"
             stroke={accent}
-            strokeWidth="1.1"
+            strokeWidth="1.05"
           />
           <path
-            d="M18 58 C42 48 62 54 82 46 C106 38 124 46 142 40"
+            d="M16 66 C40 56 62 64 82 58 C108 50 128 58 146 50"
             fill="none"
             stroke="currentColor"
-            strokeOpacity="0.45"
+            strokeOpacity="0.5"
             strokeWidth="0.9"
           />
           <path
-            d="M26 46 C48 38 66 42 84 34 C104 26 120 34 136 30"
+            d="M22 54 C44 46 64 52 84 44 C106 36 124 44 140 38"
             fill="none"
             stroke="currentColor"
-            strokeOpacity="0.32"
+            strokeOpacity="0.35"
             strokeWidth="0.8"
           />
           <path
-            d="M12 86 L28 64 L46 72 L70 44 L92 60 L114 36 L148 54"
+            d="M30 44 C50 36 68 40 86 32 C104 24 120 32 134 28"
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.22"
+            strokeWidth="0.7"
+          />
+          <path
+            d="M10 88 L26 68 L44 76 L68 46 L90 62 L112 34 L148 52"
             fill="none"
             stroke={accent}
             strokeWidth="1.15"
@@ -133,31 +159,45 @@ function CardMotif({ motif, accent }: { motif: Motif; accent: string }) {
       ) : null}
       {motif === "volume" ? (
         <>
+          <path d="M8 86 L152 86" stroke="currentColor" strokeOpacity="0.18" strokeWidth="0.7" />
           <path
-            d="M28 62 L52 50 L76 62 L52 74 Z"
+            d="M24 66 L48 54 L72 66 L48 78 Z"
             fill={accent}
             fillOpacity="0.12"
             stroke={accent}
-            strokeWidth="1.1"
+            strokeWidth="1.05"
           />
-          <path d="M52 50 L52 28 L76 40 L76 62" fill="none" stroke={accent} strokeWidth="1.1" />
-          <path d="M52 28 L28 40 L28 62" fill="none" stroke="currentColor" strokeOpacity="0.45" strokeWidth="0.9" />
+          <path d="M48 54 L48 30 L72 42 L72 66" fill="none" stroke={accent} strokeWidth="1.05" />
           <path
-            d="M86 70 L118 54 L146 66 L114 82 Z"
+            d="M48 30 L24 42 L24 66"
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.45"
+            strokeWidth="0.9"
+          />
+          <path
+            d="M86 72 L118 56 L148 68 L116 84 Z"
             fill={accent}
             fillOpacity="0.18"
             stroke={accent}
             strokeWidth="1.15"
           />
-          <path d="M118 54 L118 30 L146 42 L146 66" fill="none" stroke={accent} strokeWidth="1.15" />
+          <path d="M118 56 L118 28 L148 40 L148 68" fill="none" stroke={accent} strokeWidth="1.15" />
           <path
-            d="M118 30 L86 46 L86 70"
+            d="M118 28 L86 44 L86 72"
             fill="none"
             stroke="currentColor"
             strokeOpacity="0.5"
             strokeWidth="0.95"
           />
-          <path d="M70 84 L92 74 L110 82" fill="none" stroke="currentColor" strokeOpacity="0.28" strokeWidth="0.8" />
+          <path
+            d="M70 70 A16 10 0 0 1 102 70 L102 78 A16 10 0 0 1 70 78 Z"
+            fill={accent}
+            fillOpacity="0.1"
+            stroke={accent}
+            strokeWidth="0.95"
+          />
+          <path d="M70 70 A16 10 0 0 1 102 70" fill="none" stroke="currentColor" strokeOpacity="0.35" />
         </>
       ) : null}
     </svg>
@@ -181,11 +221,13 @@ export function SpatialContextSection() {
               tabIndex={0}
               className="spatial-hover-card"
             >
-              <CardMotif motif={card.motif} accent={card.accent} />
-              <div className="spatial-hover-card-wash" />
-              <div className="spatial-hover-card-copy">
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
+              <div className="spatial-hover-card-core">
+                <CardMotif motif={card.motif} accent={card.accent} />
+                <div className="spatial-hover-card-wash" />
+                <div className="spatial-hover-card-copy">
+                  <h3>{card.title}</h3>
+                  <p>{card.body}</p>
+                </div>
               </div>
             </article>
           ))}
