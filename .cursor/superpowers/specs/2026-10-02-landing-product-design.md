@@ -209,8 +209,10 @@ The five groups must not be rendered as equal rounded cards or as a
 five-cell grid. Present them as one vertical carousel in `#tools`: a 16:9
 visual on top (local CSS/SVG placeholders until product screenshots exist;
 no remote images), then the group title and items, then previous/next
-controls. The carousel block uses the same hairline instrument frame as the
-spatial cards in `#data`. Slide height must not change between groups. The visual
+controls. Each previous/next activation moves exactly one group. A tap on
+those controls is not a swipe plus a click: touch swipe does not fire when
+the gesture starts on a control or never moved. The carousel block uses the
+same hairline instrument frame as the spatial cards in `#data`. Slide height must not change between groups. The visual
 width matches the section content width. Autoplay pauses on hover, keyboard
 focus, a hidden document, and `prefers-reduced-motion`. Progress labels sit
 under the arrows and are centered; at `max-width: 760px` hide everything

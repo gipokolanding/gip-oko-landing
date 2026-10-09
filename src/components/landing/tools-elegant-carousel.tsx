@@ -1,6 +1,10 @@
 "use client";
 
 import { SectionHeading } from "@/components/landing/section-heading";
+import {
+  carouselSwipeFromTouch,
+  isCarouselControlTarget,
+} from "@/components/landing/tools-carousel-swipe";
 import { landing } from "@/content/landing";
 import {
   useCallback,
@@ -215,6 +219,8 @@ export function ToolsElegantCarousel() {
   const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const touchDidMove = useRef(false);
+  const touchStartedOnControl = useRef(false);
 
   const isPaused = reducedMotion || hoverPaused || focusPaused || hidden;
   const currentSlide = slides[currentIndex] ?? slides[0];
@@ -291,19 +297,29 @@ export function ToolsElegantCarousel() {
   }, [goNext, isPaused, progressIndex]);
 
   const handleTouchStart = (event: TouchEvent) => {
-    touchStartX.current = event.targetTouches[0]?.clientX ?? 0;
+    const x = event.targetTouches[0]?.clientX ?? 0;
+    touchStartX.current = x;
+    touchEndX.current = x;
+    touchDidMove.current = false;
+    touchStartedOnControl.current = isCarouselControlTarget(event.target);
   };
 
   const handleTouchMove = (event: TouchEvent) => {
-    touchEndX.current = event.targetTouches[0]?.clientX ?? 0;
+    touchEndX.current = event.targetTouches[0]?.clientX ?? touchEndX.current;
+    touchDidMove.current = true;
   };
 
   const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 60) {
-      if (diff > 0) goNext();
-      else goPrev();
-    }
+    const swipe = carouselSwipeFromTouch({
+      startX: touchStartX.current,
+      endX: touchEndX.current,
+      startedOnControl: touchStartedOnControl.current,
+      didMove: touchDidMove.current,
+    });
+    touchDidMove.current = false;
+    touchStartedOnControl.current = false;
+    if (swipe === "next") goNext();
+    else if (swipe === "prev") goPrev();
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {

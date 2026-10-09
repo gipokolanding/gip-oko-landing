@@ -76,6 +76,10 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   the old five-cell text grid. Copy, motion, and 760 px progress hiding are
   owned by
   `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`.
+  Parent `touchstart`/`touchend` swipe must ignore gestures that start on
+  arrow or progress controls, and must not treat a tap (no `touchmove`,
+  stale `endX`) as a swipe. Phone taps fire swipe then `click`; desktop
+  mouse does not.
 - Contacts live in `<footer id="contacts">` after `main`, not a section
   inside `main`. Two columns (heading/lede left, requisites right), then a
   cropped SVG wireframe globe (`FooterGlobe`), not the old 2×2 cell grid
