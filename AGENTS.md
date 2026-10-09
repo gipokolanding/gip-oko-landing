@@ -27,6 +27,8 @@
 - 3D model: `public/models/background-model.glb`.
 - Production is a static export (`output: "export"`). The site is served
   from the host root unless `NEXT_PUBLIC_BASE_PATH` is set at build time.
+- GitHub default branch is `main` (releases and GitHub Pages). `dev` is
+  the standing branch for intermediate coding. Do not delete `dev`.
 
 ## Working rules
 
