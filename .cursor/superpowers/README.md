@@ -23,7 +23,8 @@ agent logs.
 - [ГИП «Око» landing product specification](./specs/2026-10-02-landing-product-design.md)
   — implemented 2026-10-05; tools carousel 2026-10-07; spatial hover cards
   2026-10-07; contacts footer 2026-10-08; stacked hero GLB overlay
-  2026-10-08; header compact CTA and pending `#contacts` 2026-10-08. Plan:
+  2026-10-08; header compact CTA 2026-10-08; pending CTAs disabled
+  2026-10-09. Plan:
   [2026-10-05-landing-product.md](./plans/2026-10-05-landing-product.md).
   Stacked overlay and header compact CTA had no new plan (Evgeniy skipped
   them).

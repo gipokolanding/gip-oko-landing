@@ -52,8 +52,8 @@
 
 - The page meets the landing specification and product-safety constraints.
 - The CTA uses `NEXT_PUBLIC_DEMO_URL`. A valid URL opens the demo in the
-  current tab. Until that URL exists, pending CTAs follow the landing
-  specification (`#contacts`). Do not invent a demo URL or `/demo`.
+  current tab. Until that URL exists, pending CTAs are disabled non-links
+  (`aria-disabled`) and do not navigate. Do not invent a demo URL or `/demo`.
 - No console, hydration, accessibility, or unexpected network errors.
 - The local GLB loads, degrades safely, and remains below 5 MB.
 - Desktop, 390 px, keyboard-only, no-mouse, reduced-motion, and WebGL fallback

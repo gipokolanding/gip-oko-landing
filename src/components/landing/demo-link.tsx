@@ -19,15 +19,15 @@ export function DemoLink({ demo, className, tipId }: DemoLinkProps) {
   }
 
   return (
-    <a
+    <span
       className={className ?? "demo-link is-pending"}
-      href={`#${landing.contacts.id}`}
+      aria-disabled="true"
       aria-describedby={tipId}
     >
       {label}
       <span id={tipId} className="demo-link-tip" role="tooltip">
         {landing.cta.soon}
       </span>
-    </a>
+    </span>
   );
 }

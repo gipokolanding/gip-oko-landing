@@ -145,6 +145,7 @@ a {
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: -0.02em;
+  user-select: none;
 }
 
 .site-nav {
@@ -250,6 +251,7 @@ a {
   display: inline-flex;
   align-items: center;
   color: var(--muted);
+  user-select: none;
   transition: color 420ms var(--motion);
 }
 
@@ -283,16 +285,19 @@ a {
 
 .demo-link.is-pending {
   background: var(--instrument);
-  border-color: rgb(88 232 244 / 0.5);
-  color: color-mix(in srgb, var(--frost) 72%, var(--muted));
+  border-color: var(--line);
+  color: var(--muted);
+  cursor: default;
+  user-select: none;
 }
 
-.demo-link.is-pending:hover,
+/* Restore when pending CTAs become interactive again. */
+/* .demo-link.is-pending:hover,
 .demo-link.is-pending:focus-visible {
   background: color-mix(in srgb, var(--instrument) 72%, var(--abyss));
   border-color: rgb(88 232 244 / 0.45);
   color: var(--muted);
-}
+} */
 
 .demo-link:active:not(.is-pending) {
   transform: scale(0.98);
@@ -638,6 +643,7 @@ a {
   color: var(--muted);
   font-size: 0.8125rem;
   letter-spacing: 0.08em;
+  user-select: none;
 }
 
 .tools-carousel-index-line {
@@ -751,6 +757,7 @@ a {
   font-size: 0.75rem;
   line-height: 1.25;
   text-align: center;
+  user-select: none;
 }
 
 .tools-carousel-progress-item.is-active {

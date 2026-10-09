@@ -37,7 +37,6 @@ export function HeaderBar({ demo }: HeaderBarProps) {
 
   const label = landing.cta.label;
   const pending = demo.status !== "ready";
-  const href = pending ? `#${landing.contacts.id}` : demo.href;
   const compactTip = pending
     ? `${label} ${landing.cta.soonSuffix}`
     : label;
@@ -95,40 +94,46 @@ export function HeaderBar({ demo }: HeaderBarProps) {
           ))}
         </nav>
       </div>
-      <a
-        className={
-          pending ? "demo-link header-cta is-pending" : "demo-link header-cta"
-        }
-        href={href}
-        aria-label={compact ? compactTip : undefined}
-        aria-describedby={pending && !compact ? "header-cta-soon" : undefined}
-      >
-        <EyeIcon />
-        <span className="header-cta-label">{label}</span>
-        {pending ? (
-          <>
-            <span
-              id="header-cta-soon"
-              className="demo-link-tip header-cta-tip-full"
-              role="tooltip"
-              aria-hidden={compact}
-            >
-              {landing.cta.soon}
+      {demo.status === "ready" ? (
+        <a
+          className="demo-link header-cta"
+          href={demo.href}
+          aria-label={compact ? compactTip : undefined}
+        >
+          <EyeIcon />
+          <span className="header-cta-label">{label}</span>
+          {compact ? (
+            <span className="demo-link-tip header-cta-tip-compact" role="tooltip">
+              {label}
             </span>
-            <span
-              className="demo-link-tip header-cta-tip-compact"
-              role="tooltip"
-              aria-hidden={!compact}
-            >
-              {compactTip}
-            </span>
-          </>
-        ) : compact ? (
-          <span className="demo-link-tip header-cta-tip-compact" role="tooltip">
-            {label}
+          ) : null}
+        </a>
+      ) : (
+        <span
+          className="demo-link header-cta is-pending"
+          aria-disabled="true"
+          aria-label={compact ? compactTip : undefined}
+          aria-describedby={!compact ? "header-cta-soon" : undefined}
+        >
+          <EyeIcon />
+          <span className="header-cta-label">{label}</span>
+          <span
+            id="header-cta-soon"
+            className="demo-link-tip header-cta-tip-full"
+            role="tooltip"
+            aria-hidden={compact}
+          >
+            {landing.cta.soon}
           </span>
-        ) : null}
-      </a>
+          <span
+            className="demo-link-tip header-cta-tip-compact"
+            role="tooltip"
+            aria-hidden={!compact}
+          >
+            {compactTip}
+          </span>
+        </span>
+      )}
       <span
         ref={measureRef}
         className="demo-link header-cta-measure"

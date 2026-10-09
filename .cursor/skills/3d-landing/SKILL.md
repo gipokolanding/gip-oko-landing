@@ -87,5 +87,6 @@ description: Use when building, changing or reviewing the 3D landing for ГИП 
   `.cursor/superpowers/specs/2026-10-07-footer-globe-design.md`.
 - Header is always one row. When the labelled demo action no longer fits,
   it becomes Font Awesome 5 Regular `eye` (~23px in a `36×36` control),
-  not a play mark or a globe. Pending CTAs go to `#contacts`. Owned by
+  not a play mark or a globe. Pending CTAs are disabled non-links
+  (`aria-disabled`), including the compact eye. Owned by
   `.cursor/superpowers/specs/2026-10-02-landing-product-design.md`.

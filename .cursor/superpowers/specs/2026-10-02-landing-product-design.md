@@ -1,6 +1,6 @@
 # ГИП «Око» Landing Product Specification
 
-**Status:** implemented 2026-10-05; contacts footer 2026-10-08; stacked hero GLB overlay 2026-10-08; header compact CTA and pending `#contacts` 2026-10-08
+**Status:** implemented 2026-10-05; contacts footer 2026-10-08; stacked hero GLB overlay 2026-10-08; header compact CTA 2026-10-08; pending CTAs disabled 2026-10-09
 
 ## Document purpose
 
@@ -33,8 +33,8 @@ the brief wins.
   Keep the local GLB and the Blender-parity color-management contract.
   Do not add a parallel route.
 - This implementation cycle does not set `NEXT_PUBLIC_DEMO_URL`. Development
-  uses the pending CTA defined below: every primary action goes to
-  `#contacts` rather than a demo substitute. A production release remains
+  uses the pending CTA defined below: every primary action is a disabled
+  non-link rather than a demo substitute. A production release remains
   blocked until a valid URL exists. Do not invent a `/demo` route or a
   lead form.
 - Out of scope: changing the product itself, building the demo, lead capture,
@@ -96,7 +96,8 @@ Required visible content:
 - Primary action: `Запустить демонстрацию`
 
 The header must not contain status theater such as “online,” “active,”
-“runtime,” or artificial system telemetry. Brand and the three anchors
+“runtime,” or artificial system telemetry. Brand, nav, and pending CTA
+text is not selectable. Brand and the three anchors
 sit together on the start edge; the demo action sits on the end. The
 navigation must remain on that first row at 390 px rather than moving
 under the brand or disappearing. The header stays in the viewport while
@@ -213,7 +214,7 @@ spatial cards in `#data`. Slide height must not change between groups. The visua
 width matches the section content width. Autoplay pauses on hover, keyboard
 focus, a hidden document, and `prefers-reduced-motion`. Progress labels sit
 under the arrows and are centered; at `max-width: 760px` hide everything
-below the arrows. Left and right arrow keys change slides when the carousel
+below the arrows. Index and progress labels are not selectable. Left and right arrow keys change slides when the carousel
 is focused. The section heading remains
 `Комплексные сценарии работы с данными`; the `#tools` anchor is unchanged.
 
@@ -320,15 +321,20 @@ or unsupported deployment properties.
 - Development must never use `javascript:`, a fabricated `/demo` route,
   or a lead form as a substitute.
 - Until the product owner supplies a real demo URL:
-  - Every pending CTA is an enabled link to `#contacts` (the same
-    destination as nav `Контакты`). Hero and final keep the full label;
+  - Every pending CTA is a disabled non-link (`span` with
+    `aria-disabled="true"`), including the header compact eye. It is
+    not a link, not in the tab order, and does not navigate to
+    `#contacts` or anywhere else. Hero and final keep the full label;
     they do not shrink to the eye icon. Compact eye and type
     tightening apply only in the header.
-  - All pending CTAs share Instrument fill, `650` weight, Frost mixed
-    toward Muted Steel, and a Signal Cyan hairline
-    (`rgb(88 232 244 / 0.5)`). On `:hover` / `:focus-visible` they darken
-    toward Abyss and Muted Steel. Full-size tooltip: `...скоро`.
-    Header compact tooltip: `Запустить демонстрацию (...скоро)`.
+  - All pending CTAs share Instrument fill, `650` weight, Muted Steel
+    text, and a Frost divider hairline (`--line`). No Signal Cyan on
+    pending chrome. They use `cursor: default` and `user-select: none`,
+    and do not change fill, border, or text color on `:hover` /
+    `:focus-visible`
+    (those color rules stay commented for later). Tooltips still appear
+    on hover. Full-size tooltip: `...скоро`. Header compact tooltip:
+    `Запустить демонстрацию (...скоро)`.
   - At `max-width: 760px` the header brand, nav, and labelled CTA use
     `0.9375rem`, and labelled header CTA / nav hit areas are `36px`
     tall. The header inner is locked at `44px` from this breakpoint
@@ -338,9 +344,9 @@ or unsupported deployment properties.
 
 When the URL is absent in development:
 
-- Do not render a disabled non-link. Pending CTAs go to `#contacts`.
-- Keep the shared pending chrome above, not a filled cyan pill. Do not
-  use the Frost divider color for the border.
+- Render a disabled non-link. Do not send pending CTAs to `#contacts`.
+- Keep the gray pending chrome above, not a filled cyan pill. Use the
+  Frost divider color for the border, not Signal Cyan.
 - Do not add adjacent explanation copy. Status lives in the tooltip.
 
 ### Progressive enhancement
@@ -614,13 +620,14 @@ Responsibilities:
   - Client Component.
   - Measures remaining header row space and switches the header CTA
     between the labelled control and the eye icon. Tightens header
-    type when the icon still does not fit.
+    type when the icon still does not fit. Pending header CTA is a
+    disabled non-link in both labelled and compact forms.
 - `DemoLink`
   - Hero and final primary CTA presentation component.
   - Receives validated state and keeps copy and behavior consistent.
-    Pending state uses the shared chrome, `...скоро` tooltip, and
-    `#contacts`. It does not compact to an icon. The header does not use
-    this component.
+    Pending state uses the shared chrome, `...скоро` tooltip, and a
+    disabled non-link. It does not compact to an icon. The header does
+    not use this component.
 - `SectionHeading`
   - Shared semantic heading primitive without automatic eyebrow text.
 
@@ -812,8 +819,8 @@ Until the product owner provides evidence and approves wording, do not claim:
   label, or an eye icon whose accessible name is that label.
 - A valid real demo URL is configured for production.
 - With a valid URL, every primary CTA opens the demo in the current tab
-  without a form or modal. Without a URL, every pending CTA goes to
-  `#contacts`.
+  without a form or modal. Without a URL, every pending CTA is a
+  disabled non-link and does not navigate.
 - No unsupported claims or invented business details appear.
 
 ### Visual implementation
